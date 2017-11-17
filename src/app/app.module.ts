@@ -5,21 +5,28 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { Home } from '../pages/home/home';
+
+import { IndexModule } from '../pages/index/index.module';
+import { BuyModule } from '../pages/buy/buy.module';
+import { SellModule } from '../pages/sell/sell.module';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    Home
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
+    IndexModule,
+    BuyModule,
+    SellModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    Home
   ],
   providers: [
     StatusBar,
