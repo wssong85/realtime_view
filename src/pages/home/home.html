@@ -11,4 +11,22 @@
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p>
+  <button ion-button full-width (click)="loadjson()">(ajax load test)</button><br>
+  
+  <ion-list>
+	<ion-item *ngFor="let user of users">
+		<ion-avatar item-start>
+			<img src="{{user.picture.large}}" alt="">
+		</ion-avatar>
+		<h2>{{user.name.title}}  {{user.name.first}}</h2>
+		<br/>
+		<p>{{user.gender}}</p>
+		<br/>
+		<ion-note>{{user.registered}}</ion-note> 
+	</ion-item>
+   </ion-list>
+  
 </ion-content>
+
+
+

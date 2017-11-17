@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { HttpModule } from '@angular/http';
+
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 
@@ -18,6 +20,7 @@ import { SellModule } from '../pages/sell/sell.module';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
     IndexModule,
     BuyModule,
