@@ -7,12 +7,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { HomePage } from './home'
+import { Http, Headers } from '@angular/http';
 
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
-
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -25,6 +23,7 @@ export class Home {
   	}
   	
   	users: any;
+  	result: any;
 	
 	loadjson() {
 	
@@ -39,5 +38,37 @@ export class Home {
 		});
 	
 	}
+	
+	loadjson2(formValue: any) {
+	
+		var headers = new Headers();
+        headers.append("Content-Type", "application/json; charset=UTF-8");
+	
+		this.http.post('http://localhost/com/user/test.do', [formValue], { headers: headers })
+		
+		.map(res => res.json())
+		
+		.subscribe(res => {
+			this.result = res.success;
+		}, (err) => {
+			alert("failed loading json data");
+		});
+	
+	}
   	
+  	loadjson3(formValue: any) {
+	
+		var headers = new Headers();
+        headers.append("Content-Type", "application/json; charset=UTF-8");
+        
+		this.http.post('http://localhost/com/user/test.do', { headers: headers })
+		
+		.map(res => res.json())
+		
+		.subscribe(res => {
+			this.result = res;	
+		}, (err) => {
+			alert("failed loading json data");
+		});
+	}
 }

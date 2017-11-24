@@ -25,6 +25,17 @@
 		<ion-note>{{user.registered}}</ion-note> 
 	</ion-item>
    </ion-list>
+   
+   
+   <form role="form" #form="ngForm">
+    <div>
+        <input type="text" id="test1" name="test1" [(ngModel)]="test1" />
+        <input type="text" id="test2" name="test2" [(ngModel)]="test2" />
+
+        <button ion-button full-width (click)="loadjson2(form.value)">테스트</button><br>
+    </div>
+    <div>success : {{result}}</div>
+	</form>
   
 </ion-content>
 
