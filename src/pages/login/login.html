@@ -1,0 +1,26 @@
+<ion-content>
+<!-- 	<form (ngSubmit)="btnLoginByDefault()"> -->
+	<form role="form" #form="ngForm">
+		<ion-list>
+		
+		  <ion-item>
+		    <ion-label floating>Username</ion-label>
+		    <ion-input [(ngModel)]="user.username" type="text" name="username"></ion-input>
+		  </ion-item>
+		
+		  <ion-item>
+		    <ion-label floating>Password</ion-label>
+		    <ion-input [(ngModel)]="user.password" type="password" name="password"></ion-input>
+		  </ion-item>
+		
+		</ion-list>
+		<button ion-button (click)="btnLogin(1, form.value)" full-width>로그인</button>
+		<button ion-button (click)="btnLogin(2, form.value)" full-width>카카오 로그인</button><br>
+		<button ion-button (click)="btnLogin(3, form.value)" full-width>네이버 로그인</button><br>
+		<button ion-button (click)="btnLogin(4, form.value)" full-width>페이스북 로그인</button><br>
+		<button ion-button (click)="btnLogin(5, form.value)" full-width>구글 로그인</button>
+	</form>
+	
+<!-- 	<button ion-button full-width (click)="loadjson2(form.value)">테스트</button><br> -->
+	
+</ion-content>
