@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
+import { Login } from '../pages/login/login';
 
 import { IndexModule } from '../pages/index/index.module';
 import { BuyModule } from '../pages/buy/buy.module';
@@ -16,7 +17,9 @@ import { SellModule } from '../pages/sell/sell.module';
 @NgModule({
   declarations: [
     MyApp,
+    Login,
     Home
+    
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,9 @@ import { SellModule } from '../pages/sell/sell.module';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    Login,
     Home
+    
   ],
   providers: [
     StatusBar,
