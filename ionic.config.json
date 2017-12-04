@@ -1,5 +1,6 @@
 {
-  "name": "D:/app/ionic",
+  "name": "ionic3",
   "app_id": "",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {}
 }

@@ -1,1 +1,7 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="sidemenu" side="left">
+ 	<ion-content>
+    	<h1>이거슨 사이드다</h1>
+	</ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #sidemenu swipeBackEnabled="false"></ion-nav>

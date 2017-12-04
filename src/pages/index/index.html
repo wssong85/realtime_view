@@ -1,5 +1,16 @@
-<ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="전체" tabIcon="map"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="구매" tabIcon="basket"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="판매" tabIcon="albums"></ion-tab>
-</ion-tabs>
+<ion-header>
+	<ion-navbar>
+			<button ion-button icon-only menuToggle>
+      			<ion-icon name="menu"></ion-icon>
+    		</button>
+    	<ion-title>송중고나라</ion-title>
+  	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-tabs>
+		<ion-tab [root]="tab1Root" tabTitle="전체" tabIcon="map"></ion-tab>
+	  	<ion-tab [root]="tab2Root" tabTitle="구매" tabIcon="basket"></ion-tab>
+	  	<ion-tab [root]="tab3Root" tabTitle="판매" tabIcon="albums"></ion-tab>
+	</ion-tabs>
+</ion-content>

@@ -20,7 +20,6 @@ import { SellModule } from '../pages/sell/sell.module';
     MyApp,
     Login,
     Home
-    
   ],
   imports: [
     BrowserModule,
@@ -36,7 +35,6 @@ import { SellModule } from '../pages/sell/sell.module';
     MyApp,
     Login,
     Home
-    
   ],
   providers: [
     StatusBar,
