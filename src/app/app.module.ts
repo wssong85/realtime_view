@@ -10,6 +10,7 @@ import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 
 import { IndexModule } from '../pages/index/index.module';
+import { MapModule } from '../pages/map/map.module';
 import { BuyModule } from '../pages/buy/buy.module';
 import { SellModule } from '../pages/sell/sell.module';
 
@@ -23,6 +24,7 @@ import { SellModule } from '../pages/sell/sell.module';
     HttpModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
     IndexModule,
+    MapModule,
     BuyModule,
     SellModule
   ],

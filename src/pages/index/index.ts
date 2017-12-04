@@ -1,17 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 
+import { Map } from '../map/map';
 import { Buy } from '../buy/buy';
 import { Sell } from '../sell/sell';
-import { Home } from '../home/home';
 
 @Component({
   templateUrl: 'index.html',
 })
 export class Index {
 
-	tab1Root = Buy;
-	tab2Root = Sell;
-	tab3Root = Home;
+	tab1Root = Map;
+	tab2Root = Buy;
+	tab3Root = Sell;
 	
 	constructor() {}
 }
