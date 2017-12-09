@@ -52,17 +52,13 @@ export class Login {
 	public loadjson2(formValue: any) {
 	
 		var headers = new Headers();
-        headers.append("Content-Type", "application/json");
-       // headers.append("Parameter", formValue);
-  		
+        headers.append("Content-Type", "application/json; charset=UTF-8");
+        
   		console.log("formValue =>");
   		console.log(formValue);      
 		
-		var vParam = "http://localhost/shopping/user/apiSelectTbUserCountForCheck.do?username=" + formValue["username"] + "&" + "password=" + formValue["password"];
+		this.http.post('http://localhost/shopping/user/apiSelectTbUserCountForCheck.do', formValue, { headers: headers })
 		
-		console.log(vParam);
-		
-		this.http.post(vParam, formValue, { headers: headers })
 		.map(res => res.json())
 		
 		.subscribe(res => {
