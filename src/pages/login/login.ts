@@ -33,29 +33,55 @@ export class Login {
 	user = {
 	
 	}
-	
+
 	btnLogin(v, v2) {
 	
 //	console.log('1');
-	console.log(v);
-	console.log(v2);
+	//console.log(v);
+	//console.log(v2);
 //	console.log(this.user.username);
 //	console.log(this.user.password);
+
+		if(v == "1") {
+			console.log(v2);
+			this.loadjson2(v2);
+		}
 		
-		this.navCtrl.push(Index);
 	}
 	 	
-	loadjson2(formValue: any) {
+	public loadjson2(formValue: any) {
 	
 		var headers = new Headers();
-        headers.append("Content-Type", "application/json; charset=UTF-8");
-	
-		this.http.post('http://localhost/com/user/test.do', [formValue], { headers: headers })
+        headers.append("Content-Type", "application/json");
+       // headers.append("Parameter", formValue);
+  		
+  		console.log("formValue =>");
+  		console.log(formValue);      
 		
+		var vParam = "http://localhost/shopping/user/apiSelectTbUserCountForCheck.do?username=" + formValue["username"] + "&" + "password=" + formValue["password"];
+		
+		console.log(vParam);
+		
+		this.http.post(vParam, formValue, { headers: headers })
 		.map(res => res.json())
 		
 		.subscribe(res => {
-			this.result = res.success;
+		
+			if(res.success) {
+			
+				console.log("==>" + res.result);
+				console.log(res.result);
+			
+				if(res.result) {
+					this.navCtrl.push(Index);
+				} else {
+					alert("로그인정보를 입력해 주십시오.");
+				}
+			
+			} else {
+				alert(res.message);
+			}
+			
 		}, (err) => {
 			alert("failed loading json data");
 		});
