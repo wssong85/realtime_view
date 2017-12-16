@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 
 import { Http, Headers } from '@angular/http';
 import { Index } from '../index/index';
@@ -20,7 +20,7 @@ import 'rxjs/add/operator/timeout';
   templateUrl: 'login.html'
 })
 export class Login {
-	constructor(public navCtrl: NavController, public http: Http) {
+	constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: Http) {
 
   	}
   	
@@ -49,7 +49,7 @@ export class Login {
 		
 	}
 	 	
-	public loadjson2(formValue: any) {
+	loadjson2(formValue: any) {
 	
 		var headers = new Headers();
         headers.append("Content-Type", "application/json; charset=UTF-8");
@@ -69,19 +69,28 @@ export class Login {
 				console.log(res.result);
 			
 				if(res.result) {
-					this.navCtrl.push(Index);
+                    this.navCtrl.setRoot(Index);
+                    
 				} else {
-					alert("로그인정보를 입력해 주십시오.");
+					this.showAlert("로그인정보를 입력해 주십시오.");
 				}
 			
 			} else {
-				alert(res.message);
+				this.showAlert(res.message);
 			}
 			
 		}, (err) => {
-			alert("failed loading json data");
+			this.showAlert("failed loading json data");
 		});
 	
 	}
 	
+	showAlert(message: any) {
+    	let alert = this.alertCtrl.create({
+      		title: "알림",
+      		subTitle: message,
+      		buttons: ["확인"]
+    	});
+    	alert.present();
+  	}
 }

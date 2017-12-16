@@ -1,6 +1,15 @@
 <ion-menu [content]="sidemenu" side="left">
- 	<ion-content>
-    	<h1>이거슨 사이드다</h1>
+ 	 <ion-header>
+		<ion-toolbar>
+			<ion-title>
+				<ion-icon name="contact"></ion-icon> <span class="name">아무개님</span>, <br/> 지옥에 온 걸 환영한다!
+			</ion-title>
+    	</ion-toolbar>
+  	</ion-header>
+	<ion-content>
+		<ion-list>
+			<button ion-item menuClose (click)="openPage()">관심목록 등록</button>
+	    </ion-list>
 	</ion-content>
 </ion-menu>
 
