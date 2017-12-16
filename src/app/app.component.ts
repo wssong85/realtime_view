@@ -2,12 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Geolocation } from '@ionic-native/geolocation';
 
 import { Index } from '../pages/index/index';
 import { Login } from '../pages/login/login';
-import { Home } from '../pages/home/home';
-
+import { Hashtag } from '../pages/hashtag/hashtag';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +27,7 @@ export class MyApp {
 	}
 	
 	openPage() {
-		this.nav.push(Home);
+		this.nav.push(Hashtag);
 	}
 }
 

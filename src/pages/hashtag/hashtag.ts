@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 
 import { Http, Headers } from '@angular/http';
 
@@ -30,8 +30,8 @@ export class Hashtag {
   }
 
 
-	constructor(public navCtrl: NavController, public http: Http) {
-
+	constructor(public navCtrl: NavController, public menuCtrl: MenuController, public http: Http) {
+		this.menuCtrl.swipeEnable(false);
   	}
 
 }
