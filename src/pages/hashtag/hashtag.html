@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>관심목록 등록</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content text-center>
+
+  <ion-list>
+    <ion-item text-left>
+    	<ion-label>해쉬태그</ion-label>
+    	<ion-input></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header text-left>
+      	가격
+      <ion-badge item-end color="secondary">{{saturation}}</ion-badge>
+    </ion-list-header>
+    
+    <ion-item>
+      <ion-range min="0" max="9999999999" pin="true" [(ngModel)]="saturation" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>9999999999</ion-label>
+      </ion-range>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item text-left>
+      <ion-label>거래종류</ion-label>
+      <ion-select [(ngModel)]="gender">
+    	<ion-option value="1">직거래</ion-option>
+    	<ion-option value="2">택배</ion-option>
+  	  </ion-select>
+    </ion-item>
+    
+  </ion-list>
+  
+	<button ion-button round>적용하기</button>
+
+</ion-content>
+
+<style>
+  ion-list + ion-list {
+    margin-top: 0;
+  }
+</style>
