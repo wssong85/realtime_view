@@ -10,8 +10,11 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 import { Login } from '../pages/login/login';
+<<<<<<< HEAD
 import { Zone } from '../pages/zone/zone';
 import { Filter } from '../pages/filter/filter';
+=======
+>>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
 
 import { IndexModule } from '../pages/index/index.module';
 import { BuyModule } from '../pages/buy/buy.module';
@@ -23,10 +26,14 @@ import { SellModule } from '../pages/sell/sell.module';
   declarations: [
     MyApp,
     Login,
+<<<<<<< HEAD
     Home,
     Hashtag,
     Zone,
     Filter
+=======
+    Home
+>>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
   ],
   imports: [
     BrowserModule,
@@ -42,10 +49,14 @@ import { SellModule } from '../pages/sell/sell.module';
   entryComponents: [
     MyApp,
     Login,
+<<<<<<< HEAD
     Home,
     Hashtag,
     Zone,
     Filter
+=======
+    Home
+>>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
   ],
   providers: [
     StatusBar,

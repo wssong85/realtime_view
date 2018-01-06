@@ -29,6 +29,7 @@ export class MyApp {
 	openPage() {
 		this.nav.push(Hashtag);
 	}
+	
 }
 
 

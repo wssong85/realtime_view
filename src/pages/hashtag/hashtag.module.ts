@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { Map } from './map';
+import { Hashtag } from './hashtag';
 
 @NgModule({
 	declarations: [
-    	Map
+    	Hashtag
   	],
   	imports: [
-    	IonicPageModule.forChild(Map),
+    	IonicPageModule.forChild(Hashtag),
   	],
   	entryComponents: [
-    	Map
+    	Hashtag
   	]
 })
-export class MapModule {}
+export class HashtagModule {}

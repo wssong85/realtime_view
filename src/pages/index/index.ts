@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 
 import { NavController, AlertController } from 'ionic-angular';
+=======
+>>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
 
 import { Map } from '../map/map';
 import { Buy } from '../buy/buy';
