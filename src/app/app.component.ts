@@ -14,8 +14,8 @@ export class MyApp {
 
 	@ViewChild(Nav) nav: Nav;
 	
-	//rootPage:any = Index;
-  	rootPage:any = Login;
+	rootPage:any = Index;
+  	//rootPage:any = Hashtag;
   
   	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     	platform.ready().then(() => {
