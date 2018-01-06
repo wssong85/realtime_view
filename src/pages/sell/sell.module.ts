@@ -5,13 +5,13 @@ import { Sell } from './sell';
 
 @NgModule({
 	declarations: [
-    	Sell,
+    	Sell
   	],
   	imports: [
     	IonicPageModule.forChild(Sell),
   	],
   	entryComponents: [
-    	Sell,
+    	Sell
   	]
 })
 

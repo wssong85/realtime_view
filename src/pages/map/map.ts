@@ -30,7 +30,7 @@ export class Map {
  			lat = resp.coords.latitude;
  			lng =  resp.coords.longitude;
  			
- 			console.log(lat, lng);
+ 			console.log("geolocation => ", lat, lng);
  			
  			this.map.setCenter(new google.maps.LatLng(lat, lng));
  			

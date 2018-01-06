@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Map } from '../map/map';
 import { Buy } from '../buy/buy';

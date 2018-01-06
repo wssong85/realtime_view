@@ -10,35 +10,34 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 import { Login } from '../pages/login/login';
-import { Hashtag } from '../pages/hashtag/hashtag';
 
 import { IndexModule } from '../pages/index/index.module';
-import { MapModule } from '../pages/map/map.module';
 import { BuyModule } from '../pages/buy/buy.module';
+import { HashtagModule } from '../pages/hashtag/hashtag.module';
+import { MapModule } from '../pages/map/map.module';
 import { SellModule } from '../pages/sell/sell.module';
 
 @NgModule({
   declarations: [
     MyApp,
     Login,
-    Home,
-    Hashtag
+    Home
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
+    BuyModule,
+    HashtagModule,
     IndexModule,
     MapModule,
-    BuyModule,
     SellModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     Login,
-    Home,
-    Hashtag
+    Home
   ],
   providers: [
     StatusBar,

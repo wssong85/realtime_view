@@ -5,13 +5,13 @@ import { Index } from './index';
 
 @NgModule({
 	declarations: [
-    	Index,
+    	Index
   	],
   	imports: [
     	IonicPageModule.forChild(Index),
   	],
   	entryComponents: [
-    	Index,
+    	Index
   	]
 })
 export class IndexModule {}
