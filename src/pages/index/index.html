@@ -1,8 +1,21 @@
 <ion-header>
 	<ion-navbar>
-			<button ion-button icon-only menuToggle>
-      			<ion-icon name="menu"></ion-icon>
-    		</button>
+	
+		<button ion-button icon-only menuToggle>
+     		<ion-icon name="menu"></ion-icon>
+   		</button>
+    		
+        <ion-buttons end>
+        
+        <button ion-button (click)="pushMap($event)">
+        	<ion-icon name="ios-map"></ion-icon>
+      	</button>
+  		<button ion-button (click)="pushSettings($event)">
+  			<ion-icon name="settings"></ion-icon>
+      	</button>
+      	
+    	</ion-buttons>
+    	
     	<ion-title>송중고나라</ion-title>
   	</ion-navbar>
 </ion-header>
