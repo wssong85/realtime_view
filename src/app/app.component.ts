@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Index } from '../pages/index/index';
 import { Login } from '../pages/login/login';
 import { Hashtag } from '../pages/hashtag/hashtag';
+import { Detail } from '../pages/detail/detail';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +16,7 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 	
 	//rootPage:any = Index;
-  	rootPage:any = Login;
+  	rootPage:any = Detail;
   
   	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     	platform.ready().then(() => {

@@ -16,13 +16,14 @@ import { IndexModule } from '../pages/index/index.module';
 import { MapModule } from '../pages/map/map.module';
 import { BuyModule } from '../pages/buy/buy.module';
 import { SellModule } from '../pages/sell/sell.module';
+import { DetailModule } from '../pages/detail/detail.module';
 
 @NgModule({
   declarations: [
     MyApp,
     Login,
     Home,
-    Hashtag
+    Hashtag,
   ],
   imports: [
     BrowserModule,
@@ -31,14 +32,15 @@ import { SellModule } from '../pages/sell/sell.module';
     IndexModule,
     MapModule,
     BuyModule,
-    SellModule
+    SellModule,
+    DetailModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     Login,
     Home,
-    Hashtag
+    Hashtag,
   ],
   providers: [
     StatusBar,
