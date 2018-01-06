@@ -1,4 +1,21 @@
-<ion-content padding>
-	구매구매
+<ion-content>
+	
+		<div id="left">
+			<div #map id="map"></div>
+		</div>
+		<div id="right">
+			<ion-list>
+				<ion-item *ngFor="let user of users">
+					<ion-avatar item-start>
+						<img src="{{user.picture.large}}" alt="">
+					</ion-avatar>
+					<h2>{{user.name.title}}  {{user.name.first}}</h2>
+					<br/>
+					<p>{{user.gender}}</p>
+					<br/>
+					<ion-note>{{user.registered}}</ion-note> 
+				</ion-item>
+		   </ion-list>
+		</div>	
 	
 </ion-content>

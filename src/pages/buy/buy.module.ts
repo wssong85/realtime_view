@@ -5,13 +5,13 @@ import { Buy } from './buy';
 
 @NgModule({
 	declarations: [
-    	Buy,
+    	Buy
   	],
   	imports: [
     	IonicPageModule.forChild(Buy),
   	],
   	entryComponents: [
-    	Buy,
+    	Buy
   	]
 })
 export class BuyModule {}

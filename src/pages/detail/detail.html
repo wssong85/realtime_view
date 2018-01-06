@@ -1,0 +1,69 @@
+<ion-content>
+	<ion-list>
+    	<ion-list-header></ion-list-header>
+    	
+    	<!-- 이미지 -->
+    	<ion-item>
+	    	<ion-thumbnail>
+		    	<ion-img src=""></ion-img>
+		    	<ion-img src="assets/imgs/upload/adidas_2.PNG"></ion-img>
+		    	<ion-img src="assets/imgs/upload/adidas_3.PNG"></ion-img>
+			</ion-thumbnail>
+    	</ion-item>
+    	
+    	<!-- hashtag -->
+		<ion-item>
+			<ion-label stacked>hashtag</ion-label>
+<!-- 			<ion-input type="text" readonly value="#아디다스 #오리지널 #중고"></ion-input> -->
+			<ion-input type="text" placeholder="hashtag" readonly value="#아디다스 #오리지널 #중고"></ion-input>
+		</ion-item>
+    	
+    	<!-- 거래가격 -->
+		<ion-item>
+			<ion-label stacked>거래가격</ion-label>
+			<ion-range min="0" max="9999999" [(ngModel)]="cash" color="secondary">
+				<ion-label range-left>0</ion-label>
+				<ion-label range-right>9999999</ion-label>
+			</ion-range>
+		</ion-item>
+    	
+    	<!-- 전화번호 -->
+    	<ion-item>
+			<ion-label stacked>Phone</ion-label>
+<!-- 		  	<ion-input type="tel" readonly value="010-0000-0000"></ion-input> -->
+		  	<ion-input type="tel" placeholder="Phone" readonly value="010-0000-0000"></ion-input>
+		</ion-item>
+    	
+    	<!-- 거래종류 button -->
+		<ion-item>
+			<ion-label stacked>거래종류</ion-label>
+			
+			<!-- 
+			<button ion-button round icon-start>
+				<ion-icon name="star"></ion-icon>
+		      	직거래
+			</button>
+			<button ion-button round icon-start>
+				<ion-icon name="star"></ion-icon>
+		      	택배
+			</button>
+			 -->
+		</ion-item>
+		    	
+    	<!-- 제목 -->
+		<ion-item>
+			<ion-label stacked>제목</ion-label>
+<!-- 			<ion-input type="text" readonly value="오리지널A급판매합니다"></ion-input> -->
+			<ion-input type="text" readonly value="오리지널A급판매합니다"></ion-input>
+		</ion-item>
+		    	
+    	<!-- 판매위치 -->
+		<ion-item>
+			<ion-label stacked>판매위치</ion-label>
+<!-- 			<ion-input type="text" readonly value=""></ion-input> -->
+			<ion-input type="text" readonly value=""></ion-input>
+			<ion-icon ios="ios-locate" md="md-locate"></ion-icon>
+		</ion-item>
+		
+  	</ion-list>
+</ion-content>

@@ -15,8 +15,13 @@ export class MyApp {
 
 	@ViewChild(Nav) nav: Nav;
 	
+<<<<<<< HEAD
 	//rootPage:any = Index;
   	rootPage:any = Detail;
+=======
+	rootPage:any = Index;
+  	//rootPage:any = Hashtag;
+>>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
   
   	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     	platform.ready().then(() => {
@@ -30,6 +35,7 @@ export class MyApp {
 	openPage() {
 		this.nav.push(Hashtag);
 	}
+	
 }
 
 
