@@ -10,11 +10,10 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 import { Login } from '../pages/login/login';
-<<<<<<< HEAD
+
 import { Zone } from '../pages/zone/zone';
 import { Filter } from '../pages/filter/filter';
-=======
->>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
+//import { Hashtag } from '../pages/hashtag/hashtag';
 
 import { IndexModule } from '../pages/index/index.module';
 import { BuyModule } from '../pages/buy/buy.module';
@@ -27,17 +26,10 @@ import { DetailModule } from '../pages/detail/detail.module';
   declarations: [
     MyApp,
     Login,
-<<<<<<< HEAD
     Home,
-    Hashtag,
-<<<<<<< HEAD
-=======
+    //Hashtag,
     Zone,
     Filter
-=======
-    Home
->>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
->>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
   ],
   imports: [
     BrowserModule,
@@ -47,29 +39,17 @@ import { DetailModule } from '../pages/detail/detail.module';
     HashtagModule,
     IndexModule,
     MapModule,
-<<<<<<< HEAD
-    BuyModule,
     SellModule,
     DetailModule
-=======
-    SellModule
->>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     Login,
-<<<<<<< HEAD
     Home,
-    Hashtag,
-<<<<<<< HEAD
-=======
+    //Hashtag,
     Zone,
     Filter
-=======
-    Home
->>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
->>>>>>> branch 'master' of https://github.com/wssong85/realtime_view
   ],
   providers: [
     StatusBar,
