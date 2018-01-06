@@ -13,6 +13,7 @@ export class Buy {
 
 	@ViewChild("map") mapElement: ElementRef;
 	
+	users: any;
 	map: any;
 
 	constructor(public navCtrl: NavController, public http: Http, private geolocation: Geolocation) {}
