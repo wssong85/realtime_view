@@ -1,59 +1,60 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>필터 등록</ion-title>
-  </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>필터 등록</ion-title>
+  	</ion-navbar>
 </ion-header>
 
 <ion-content text-center>
 
-  <ion-list>
-    <ion-item text-left>
-    	<ion-label>해쉬태그</ion-label>
-    	<ion-input></ion-input>
-    </ion-item>
-  </ion-list>
+	<form role="form" #form="ngForm">
+		
+		<ion-list>
+			<ion-item text-left>
+				<ion-label>해쉬태그</ion-label>
+				<ion-input name="hashtag" [(ngModel)]="hashtag"></ion-input>
+			</ion-item>
+		</ion-list>
+	
+		<ion-list>
+			<ion-list-header text-left>
+				가격 
+				<ion-badge item-end color="secondary">{{price.lower}}</ion-badge>
+				<ion-badge item-end color="secondary">{{price.upper}}</ion-badge>
+			</ion-list-header>
+		
+			<ion-item>
+				<ion-range min="0" max="10000000" dualKnobs="true" pin="true" name="price" [(ngModel)]="price" color="secondary">
+					<ion-label range-left>0</ion-label>
+					<ion-label range-right>10000000</ion-label>
+				</ion-range>
+			</ion-item>
+		</ion-list>
+	
+		<ion-list>
+			<ion-item text-left>
+				<ion-label>거래종류</ion-label>
+				<ion-select name="tradeType" [(ngModel)]="tradeType">
+					<ion-option value="01">직거래</ion-option>
+					<ion-option value="02">택배</ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-list>
+	
+		<ion-list>
+			<ion-item text-left>
+				<ion-label>판매시작날짜</ion-label>
+				<ion-datetime displayFormat="MM/DD/YYYY" name="tradeStartDate" [(ngModel)]="tradeStartDate"></ion-datetime>
+			</ion-item>
+		</ion-list>
+	
+		<ion-list>
+			<ion-item text-left>
+				<ion-label>판매종료날짜</ion-label>
+				<ion-datetime displayFormat="MM/DD/YYYY" name="tradeEndDate" [(ngModel)]="tradeEndDate"></ion-datetime>
+			</ion-item>
+		</ion-list>
+	</form>
   
-  <ion-list>
-    <ion-list-header text-left>
-      	가격
-      <ion-badge item-end color="secondary">{{saturation}}</ion-badge>
-    </ion-list-header>
-    
-    <ion-item>
-      <ion-range min="0" max="9999999999" pin="true" [(ngModel)]="saturation" color="secondary">
-        <ion-label range-left>0</ion-label>
-        <ion-label range-right>9999999999</ion-label>
-      </ion-range>
-    </ion-item>
-  </ion-list>
-  
-  <ion-list>
-    <ion-item text-left>
-      <ion-label>거래종류</ion-label>
-      <ion-select [(ngModel)]="gender">
-    	<ion-option value="1">직거래</ion-option>
-    	<ion-option value="2">택배</ion-option>
-  	  </ion-select>
-    </ion-item>
-    
-  </ion-list>
-  
-  <ion-list>
-    <ion-item text-left>
-    	<ion-label>판매시작날짜</ion-label>
-    	 <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate1"></ion-datetime>
-    </ion-item>
-  </ion-list>
-  
-  <ion-list>
-    <ion-item text-left>
-    	<ion-label>판매종료날짜</ion-label>
-    	 <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate2"></ion-datetime>
-    </ion-item>
-  </ion-list>
-  
-  <button ion-button round>적용하기</button>
+	<button ion-button round (click)="sendFilter(form.value)">적용하기</button>
   
 </ion-content>

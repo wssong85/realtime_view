@@ -16,9 +16,9 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 	
   	//rootPage:any = Detail;
-	//rootPage:any = Index;
-	rootPage:any = Login;
-  	//rootPage:any = Hashtag;
+	rootPage:any = Index;
+	//rootPage:any = Login;
+	//rootPage:any = Filter;
   
   	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     	platform.ready().then(() => {
@@ -32,7 +32,6 @@ export class MyApp {
 	openPage() {
 		this.nav.push(Hashtag);
 	}
-	
 }
 
 

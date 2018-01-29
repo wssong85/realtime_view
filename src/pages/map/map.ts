@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { } from "ionic-angular";
 import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
@@ -14,11 +14,17 @@ export class Map {
 	
 	map: any;
 	
-	constructor(public navCtrl: NavController, private geolocation: Geolocation) { }
+	constructor(private geolocation: Geolocation) { }
 	
 	ionViewDidLoad() {
+		
    		this.initMap();
-  	}
+	  }
+	  
+	ionViewDidEnter() {
+		console.log("map.ts ionViewDidEnter...");
+		google.maps.event.trigger(this.map,"resize");
+	}
     
     initMap() {
     
@@ -42,6 +48,6 @@ export class Map {
     	this.map = new google.maps.Map(this.mapElement.nativeElement, {
       		zoom: 18,
       		center: {lat: lat, lng: lng}
-    	});
+		});
 	}
 }

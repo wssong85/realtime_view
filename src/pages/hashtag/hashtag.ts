@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavController, MenuController, AlertController } from 'ionic-angular';
 
 @Component({
@@ -12,20 +12,14 @@ export class Hashtag {
 	tradeType: string = "01";
   	price: any = {lower: 0, upper: 10000000};
   
-	constructor(public navCtrl: NavController, public menuCtrl: MenuController, public alertCtrl: AlertController, public http: Http) {
+	constructor(private navCtrl: NavController, private menuCtrl: MenuController, private alertCtrl: AlertController, private http: HttpClient) {
 	
 		this.menuCtrl.swipeEnable(false);
-		
-		console.log("1");
   	}
   	
   	ionViewDidLoad() {
   	
-  		console.log("2");
-  	
    		this.getHashtag();
-   	
-   		console.log("3");	
   	}
   	
   	getHashtag() {
@@ -34,21 +28,17 @@ export class Hashtag {
   		// 일단 임의로 넣음
   		let userId = "admin";
   	
-  		let headers = new Headers();
+  		let headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		this.http.post("http://localhost/shopping/hastag/apiSelectTbIfHashtagInterest.do", { userId: userId }, { headers: headers })
 		
-		.map(res => res.json())
-		
-		.subscribe(res => {
+		.subscribe((res: any) => {
 			
 			if(res.success) {
 				
 				let interest = res.interest;
-				
-				console.log(interest);
-				
+
 				if (interest) {
 			
 					this.hashtag = interest.HASHTAG;
@@ -76,23 +66,19 @@ export class Hashtag {
   	
   		console.log(formValue);
   		
-  		let headers = new Headers();
+  		let headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		this.http.post("http://localhost/shopping/hastag/apiInsertTbIfHashtagInterest.do", formValue, { headers: headers })
 		
-		.map(res => res.json())
-		
-		.subscribe(res => {
+		.subscribe((res: any) => {
 			
 			if(res.success) {
-			
-				console.log("==>" + res.result);
-				console.log(res.result);
-			
+
 				this.showAlert("관심목록을 등록했습니다.");
 			
 			} else {
+				
 				this.showAlert(res.message);
 			}
 			

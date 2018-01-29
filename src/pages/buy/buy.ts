@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { Http, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -16,12 +16,18 @@ export class Buy {
 	users: any;
 	map: any;
 
-	constructor(public navCtrl: NavController, public http: Http, private geolocation: Geolocation) {}
+	constructor(private navCtrl: NavController, private http: HttpClient, private geolocation: Geolocation) {}
 	
 	ionViewDidLoad() {
+	
    		this.initMap();
    		this.initList();
-  	}
+	}
+	  
+	ionViewDidEnter() {
+		console.log("buy.ts ionViewDidEnter...");
+		google.maps.event.trigger(this.map,"resize");
+	}
   	
   	initMap() {
     
@@ -45,16 +51,13 @@ export class Buy {
     	this.map = new google.maps.Map(this.mapElement.nativeElement, {
       		zoom: 18,
       		center: {lat: lat, lng: lng}
-    	});
+		});
 	}
 	
 	initList() {
 	
 		this.http.get('https://randomuser.me/api/?results=10')
-		
-		.map(res => res.json())
-		
-		.subscribe(res => {
+		.subscribe((res: any) => {
 			this.users = res.results;
 		}, (err) => {
 			alert("failed loading json data");
