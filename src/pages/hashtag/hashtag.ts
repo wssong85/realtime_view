@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NavController, MenuController, AlertController } from 'ionic-angular';
+import { MenuController, AlertController } from 'ionic-angular';
 
 @Component({
 	selector: 'page-hashtag',
@@ -10,9 +10,9 @@ export class Hashtag {
 
 	hashtag: string = "";
 	tradeType: string = "01";
-  	price: any = {lower: 0, upper: 10000000};
+  	price: object = {lower: 0, upper: 10000000};
   
-	constructor(private navCtrl: NavController, private menuCtrl: MenuController, private alertCtrl: AlertController, private http: HttpClient) {
+	constructor(private menuCtrl: MenuController, private alertCtrl: AlertController, private http: HttpClient) {
 	
 		this.menuCtrl.swipeEnable(false);
   	}
@@ -32,8 +32,9 @@ export class Hashtag {
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		this.http.post("http://localhost/shopping/hastag/apiSelectTbIfHashtagInterest.do", { userId: userId }, { headers: headers })
-		
 		.subscribe((res: any) => {
+
+			console.log("hashtag.ts getHashtag results => %o", res);
 			
 			if(res.success) {
 				
@@ -63,14 +64,13 @@ export class Hashtag {
   		// TODO: 추후 서버 단에서 세션값으로 변경 시 지울 것...
   		// 일단 임의로 넣음
   		formValue.userId = "admin";
-  	
-  		console.log(formValue);
+		
+		console.log("hashtag.ts sendHashtag value => %o ", formValue);
   		
   		let headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		this.http.post("http://localhost/shopping/hastag/apiInsertTbIfHashtagInterest.do", formValue, { headers: headers })
-		
 		.subscribe((res: any) => {
 			
 			if(res.success) {
@@ -87,7 +87,8 @@ export class Hashtag {
 		});
   	}
   	
-  	showAlert(message: any) {
+  	showAlert(message: string) {
+
     	let alert = this.alertCtrl.create({
       		title: "알림",
       		subTitle: message,

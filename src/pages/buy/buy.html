@@ -4,18 +4,24 @@
 			<div #map id="map"></div>
 		</div>
 		<div id="right">
-			<ion-list>
-				<ion-item *ngFor="let user of users">
+			<ion-list *ngIf="products.length !== 0;then fullList else emptyList"></ion-list>
+		   	<ng-template #fullList>
+				<ion-item *ngFor="let product of products">
 					<ion-avatar item-start>
-						<img src="{{user.picture.large}}" alt="">
 					</ion-avatar>
-					<h2>{{user.name.title}}  {{user.name.first}}</h2>
+					<h2>{{product.TITLE}}</h2>
 					<br/>
-					<p>{{user.gender}}</p>
+					<p>{{product.SALE_LOC}}</p>
+					<p>{{product.TRADE_SE === "01" ? "직거래" : "택배"}}</p>
 					<br/>
-					<ion-note>{{user.registered}}</ion-note> 
+					<ion-note>시작 : {{product.SALE_START_DATE}} / 종료 : {{product.SALE_END_DATE}}</ion-note> 
+				</ion-item>   
+		   	</ng-template>
+		   	<ng-template #emptyList>
+				<ion-item>
+					{{emptyMessage}}
 				</ion-item>
-		   </ion-list>
+			</ng-template>
 		</div>	
 	
 </ion-content>

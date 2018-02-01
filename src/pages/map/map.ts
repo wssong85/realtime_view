@@ -15,15 +15,17 @@ export class Map {
 	map: any;
 	
 	constructor(private geolocation: Geolocation) { }
-	
+
 	ionViewDidLoad() {
 		
    		this.initMap();
-	  }
+	}
 	  
 	ionViewDidEnter() {
 		console.log("map.ts ionViewDidEnter...");
-		google.maps.event.trigger(this.map,"resize");
+
+		// 지도 reisze 처리
+		this.resetMap(this.map);
 	}
     
     initMap() {
@@ -36,7 +38,7 @@ export class Map {
  			lat = resp.coords.latitude;
  			lng =  resp.coords.longitude;
  			
- 			console.log("geolocation => ", lat, lng);
+ 			console.log("map.ts geolocation => ", lat, lng);
  			
  			this.map.setCenter(new google.maps.LatLng(lat, lng));
  			
@@ -49,5 +51,16 @@ export class Map {
       		zoom: 18,
       		center: {lat: lat, lng: lng}
 		});
+	}
+
+	resetMap(map: any) {
+
+		let zoom = map.getZoom();
+		let center = map.getCenter();
+
+		google.maps.event.trigger(map, "resize");
+
+		map.setZoom(zoom);
+		map.setCenter(center);
 	}
 }

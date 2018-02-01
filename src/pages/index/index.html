@@ -6,24 +6,23 @@
    		</button>
     		
         <ion-buttons end>
-        
-        <button ion-button (click)="pushMap($event)">
-        	<ion-icon name="ios-map"></ion-icon>
-      	</button>
-  		<button ion-button (click)="pushSettings($event)">
-  			<ion-icon name="settings"></ion-icon>
-      	</button>
-      	
+			<button ion-button (click)="pushMap($event)">
+				<ion-icon name="ios-map"></ion-icon>
+			</button>
+			<button ion-button (click)="pushSettings($event)">
+				<ion-icon name="settings"></ion-icon>
+			</button>
     	</ion-buttons>
     	
-    	<ion-title>송중고나라</ion-title>
+		<ion-title>송중고나라</ion-title>
+		
   	</ion-navbar>
 </ion-header>
 
 <ion-content>
-	<ion-tabs>
-		<ion-tab [root]="tab1Root" tabTitle="전체" tabIcon="map"></ion-tab>
-	  	<ion-tab [root]="tab2Root" tabTitle="구매" tabIcon="basket"></ion-tab>
-	  	<ion-tab [root]="tab3Root" tabTitle="판매" tabIcon="albums"></ion-tab>
+	<ion-tabs #tabs (ionChange)="tabSelected($event)">
+		<ion-tab tabTitle="전체" tabIcon="map" [root]="tab1Root"></ion-tab>
+	  	<ion-tab tabTitle="구매" tabIcon="basket" [root]="tab2Root" [rootParams]="tabRootParams"></ion-tab>
+	  	<ion-tab tabTitle="판매" tabIcon="albums" [root]="tab3Root" [rootParams]="tabRootParams"></ion-tab>
 	</ion-tabs>
 </ion-content>
