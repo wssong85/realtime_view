@@ -39,7 +39,7 @@ export class Index {
 		}
 		
 		this.isFilter = isFilter || false;	// 필터를 통해서 왔는지 여부
-		this.products = products || []; 		// 필터 검색 결과
+		this.products = products || []; 	// 필터 검색 결과
 
 		// 탭으로 보낼 데이터 설정
 		this.tabRootParams = {

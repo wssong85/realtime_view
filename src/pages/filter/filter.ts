@@ -12,9 +12,9 @@ export class Filter {
 
 	hashtag: string = "";
 	price: object = {lower: 0, upper: 10000000};
-	tradeType: string = "01";
+	tradeType: string = "00";
 	tradeStartDate: string = this.getNow();
-	tradeEndDate: string = this.getNow();
+	tradeEndDate: string = this.getNow(1);
 
 	tabIdx: number = 0;
 
@@ -25,6 +25,8 @@ export class Filter {
 
 	ionViewDidLoad() { }
 	
+	// TODO: 최소값, 최대값 입력 처리, 드래그 조정은 일정간격으로
+	// TODO: 유효성 검사 체크
 	sendFilter(formValue: any) {
 
 		// TODO: 추후 서버 단에서 세션값으로 변경 시 지울 것...
@@ -42,8 +44,6 @@ export class Filter {
 			console.log("filter.ts sendFilter results => %o ", res);
 
 			if(res.success) {
-
-				let products = res.products || [];
 
 				// 일단 무조건 구매 탭으로 가게함
 				this.navCtrl.setRoot(Index, { tabIdx: 1, isFilter: true, products: res.products }); 
@@ -69,9 +69,15 @@ export class Filter {
 		// });
 	}
 
-	getNow() {
+	getNow(addMonth: number = 0) {
 
 		let now = new Date();
+
+		if (addMonth != 0) {
+
+			now.setMonth(now.getMonth() + addMonth);
+		}
+
 		let yyyy = now.getFullYear().toString();
 		let mm = (now.getMonth() + 1).toString();
 		let dd = now.getDate().toString();
@@ -85,7 +91,8 @@ export class Filter {
       		title: "알림",
       		subTitle: message,
       		buttons: ["확인"]
-    	});
+		});
+		
     	alert.present();
   	}
 }
