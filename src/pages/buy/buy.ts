@@ -15,12 +15,15 @@ export class Buy {
 
 	@ViewChild("map") mapElement: ElementRef;
 	
-	products: any[]  = [];
-	map: any;
-
 	loading: Loading;
+
+	products: any[]  = [];
 	emptyMessage: string = "";
 	isFilter: boolean = true; 
+
+	map: any;
+	markers: any[] = [];
+	curPos: any;
 
 	constructor(private navCtrl: NavController, private navParams: NavParams, public loadingCtrl: LoadingController, private http: HttpClient, private geolocation: Geolocation) {
 
@@ -70,11 +73,14 @@ export class Buy {
     	this.geolocation.getCurrentPosition().then((resp) => {
  			
  			lat = resp.coords.latitude;
- 			lng =  resp.coords.longitude;
+ 			lng = resp.coords.longitude;
  			
- 			console.log("buy.ts geolocation => ", lat, lng);
- 			
- 			this.map.setCenter(new google.maps.LatLng(lat, lng));
+			console.log("buy.ts geolocation => ", lat, lng);
+			 
+			if (this.markers.length === 0) {
+
+				this.map.setCenter(new google.maps.LatLng(lat, lng));
+			}
  			
 		}).catch((error) => {
 		
@@ -100,13 +106,7 @@ export class Buy {
 				console.log("buy.ts initList results => %o", res);
 
 				this.products = res.products || [];
-
-				if (this.products.length === 0) {
-
-					this.emptyMessage = "검색된 구매목록이 없습니다.";
-				}
-
-				this.loading.dismiss();
+				this.processList();
 
 			}, (err) => {
 
@@ -115,12 +115,7 @@ export class Buy {
 			});
 		} else {
 
-			if (this.products.length === 0) {
-
-				this.emptyMessage = "검색된 구매목록이 없습니다.";
-			}
-
-			this.loading.dismiss();
+			this.processList();
 		}
 	}
 
@@ -133,6 +128,74 @@ export class Buy {
 
 		map.setZoom(zoom);
 		map.setCenter(center);
+	}
+
+	processList() {
+
+		if (this.products.length === 0) {
+
+			this.emptyMessage = "검색된 구매목록이 없습니다.";
+			this.clearMarkers();
+
+		} else {
+
+			this.addMarkers();
+		}
+
+		this.loading.dismiss();
+	}
+
+	addMarkers() {
+
+		let bounds = new google.maps.LatLngBounds();
+
+		// 마커 찍기
+		this.products.forEach(obj => {
+
+			let coords = obj.SALE_COORDINATE.split(",");
+
+			// 좌표이므로 무조건 2개이여야 함
+			if (coords.length === 2) {
+
+				let marker = new google.maps.Marker({
+					position: new google.maps.LatLng(Number(coords[1]), Number(coords[0])),
+					map: this.map,
+					title: obj.TITLE
+				});
+
+				let infoWindow = new google.maps.InfoWindow({
+					content: `제목 : ${obj.TITLE} <br/> 내용 : ${obj.CONTENT}`
+				});
+
+				marker.addListener("click", function() {
+					infoWindow.open(this.map, marker);
+				});
+
+				this.markers.push(marker);
+				bounds.extend(marker.getPosition());
+			}
+		});
+
+		if (this.markers.length === 1) {
+
+			// 마커가 1개인 경우 마커위치로 이동
+			this.map.setCenter(this.markers[0].getPosition());
+
+		} else {
+
+			// 마커가 1개 이상인 경우 bounds 값에 따라 자동 레벨 조정
+			this.map.fitBounds(bounds);
+		}
+	}
+
+	clearMarkers() {
+
+		this.markers.forEach(marker => {
+			
+			marker.setMap(null);
+		});
+
+		this.markers.length = 0;
 	}
 }
 
