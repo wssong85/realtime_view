@@ -8,19 +8,39 @@
 
 <ion-content text-center>
 
+<ion-list radio-group [(ngModel)]="placeSelect">
+  <ion-item>
+    <ion-label>지하철</ion-label>
+    <ion-radio id="radioTrail" name="radioPlace" value="1" ></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>장소</ion-label>
+    <ion-radio id="radioPlace" name="radioPlace" value="2" checked></ion-radio>
+  </ion-item>
+</ion-list>
+
+<form role="form" #form="ngForm">
   <ion-list>
     <ion-item text-left>
     	<ion-label>장소</ion-label>
-    	<ion-input></ion-input>
+    	<ion-input id="TRAIL_NAME" name="TRAIL_NAME" [(ngModel)]="TRAIL_NAME"></ion-input>
     </ion-item>
   </ion-list>
   
-<!--   <ion-list> -->
-<!-- 	<ion-item text-left>  -->
-<!-- 		<ion-label>장소1</ion-label> -->
-<!-- 	</ion-item> -->
-<!--   </ion-list> -->
+  <button ion-button full-width (click)="loadPlace(form.value)">검색</button><br>
   
-  <button ion-button round>적용하기</button>
+  </form>
+  
+   <ion-list>
+	<ion-item *ngFor="let trailName of trailNames">
+		<ion-note>{{trailName.address}}</ion-note> 
+	</ion-item>
+   </ion-list>
+   
+<!--    <ion-list> -->
+<!-- 	<ion-item *ngFor="let placeName of placeNames"> -->
+<!-- 		<ion-note>{{placeName.address}}</ion-note>  -->
+<!-- 	</ion-item> -->
+<!--    </ion-list> -->
   
 </ion-content>
