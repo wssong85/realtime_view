@@ -19,7 +19,6 @@ import { BuyModule } from '../pages/buy/buy.module';
 import { HashtagModule } from '../pages/hashtag/hashtag.module';
 import { MapModule } from '../pages/map/map.module';
 import { SellModule } from '../pages/sell/sell.module';
-import { DetailModule } from '../pages/detail/detail.module';
 import { FilterModule } from '../pages/filter/filter.module';
 
 @NgModule({
@@ -39,8 +38,7 @@ import { FilterModule } from '../pages/filter/filter.module';
     IndexModule,
     MapModule,
     SellModule,
-    FilterModule,
-    DetailModule
+    FilterModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
