@@ -1,36 +1,37 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Tabs, Tab } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Tabs, Tab } from 'ionic-angular';
 
-import { Map } from '../map/map';
-import { Buy } from '../buy/buy';
+import { MapPage } from '../map/map';
+import { BuyPage } from '../buy/buy';
 import { Sell } from '../sell/sell';
 
 import { Zone } from '../zone/zone';
-import { Filter } from '../filter/filter';
+import { FilterPage } from '../filter/filter';
 
+@IonicPage()
 @Component({
   templateUrl: 'index.html',
 })
-export class Index {
+export class IndexPage {
 
 	@ViewChild("tabs") tabRef: Tabs;
 
-	tab1Root = Map;
-	tab2Root = Buy;
+	tab1Root = MapPage;
+	tab2Root = BuyPage;
 	tab3Root = Sell;
 
 	currentIdx: number = 0;
-	isFilter: boolean = false;
+	filters: object = {};
 	products: any[] = [];
 
 	tabRootParams:object = {};
 	
-	constructor(private navCtrl: NavController, private navParams: NavParams) {
+	constructor(public navCtrl: NavController, public navParams: NavParams) {
 
 		// navParams 처리
-		let tabIdx = this.navParams.get("tabIdx");
-		let isFilter = this.navParams.get("isFilter");
-		let products = this.navParams.get("products");
+		const tabIdx = this.navParams.get("tabIdx");
+		const filters = this.navParams.get("filters");
+		const products = this.navParams.get("products");
 		
 		// tabIdx 값이 숫자이고 0 이상 
 		if (!isNaN(tabIdx) && tabIdx >= 0) {
@@ -38,12 +39,12 @@ export class Index {
 			this.currentIdx = tabIdx;
 		}
 		
-		this.isFilter = isFilter || false;	// 필터를 통해서 왔는지 여부
+		this.filters = filters || {};		// 필터를 통해서 왔는지 여부
 		this.products = products || []; 	// 필터 검색 결과
 
 		// 탭으로 보낼 데이터 설정
 		this.tabRootParams = {
-			isFilter: this.isFilter,
+			filters: this.filters,
 			products: this.products
 		}
 	 }
@@ -63,7 +64,7 @@ export class Index {
 	}
 	
 	pushSettings(v) {
-		this.navCtrl.push(Filter, { tabIdx: this.currentIdx });
+		this.navCtrl.push(FilterPage, { tabIdx: this.currentIdx });
 	}
 
 	tabSelected(tab: Tab) {

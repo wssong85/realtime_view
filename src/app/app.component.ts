@@ -3,9 +3,9 @@ import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { Index } from '../pages/index/index';
 import { Login } from '../pages/login/login';
-import { Hashtag } from '../pages/hashtag/hashtag';
+import { IndexPage } from '../pages/index/index';
+import { HashtagPage } from '../pages/hashtag/hashtag';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,9 +15,8 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 	
   	//rootPage:any = Detail;
-	//rootPage:any = Index;
+	//rootPage:any = IndexPage;
 	rootPage:any = Login;
-	//rootPage:any = Filter;
   
   	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     	platform.ready().then(() => {
@@ -29,7 +28,7 @@ export class MyApp {
 	}
 	
 	openPage() {
-		this.nav.push(Hashtag);
+		this.nav.push(HashtagPage);
 	}
 }
 

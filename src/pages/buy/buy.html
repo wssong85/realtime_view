@@ -1,27 +1,30 @@
-<ion-content>
+<ion-content text-center>
 	
-		<div id="left">
-			<div #map id="map"></div>
-		</div>
-		<div id="right">
-			<ion-list *ngIf="products.length !== 0;then fullList else emptyList"></ion-list>
-		   	<ng-template #fullList>
-				<ion-item *ngFor="let product of products">
-					<ion-avatar item-start>
-					</ion-avatar>
-					<h2>{{product.TITLE}}</h2>
-					<br/>
-					<p>{{product.SALE_LOC}}</p>
-					<p>{{product.TRADE_SE === "01" ? "직거래" : "택배"}}</p>
-					<br/>
-					<ion-note>시작 : {{product.SALE_START_DATE}} / 종료 : {{product.SALE_END_DATE}}</ion-note> 
-				</ion-item>   
-		   	</ng-template>
-		   	<ng-template #emptyList>
-				<ion-item>
-					{{emptyMessage}}
-				</ion-item>
-			</ng-template>
-		</div>	
-	
+	<div id="left">
+		<div #map id="map"></div>
+	</div>
+	<div id="right">
+		<ion-list *ngIf="products.length !== 0;then fullList else emptyList"></ion-list>
+
+		<ng-template #fullList>
+			<ion-item class="hand" *ngFor="let product of products; let idx = index" [ngClass]="{'btn-hover': idx === hoverIdx}" 
+			(click)="detailGo(product.PRODUCT_SEQ)" (mouseenter)="itemEnter(idx)" (mouseleave)="itemLeave()">
+				<ion-avatar item-start></ion-avatar>
+				<h2>{{product.TITLE}}</h2>
+				<br/>
+				<p>{{product.SALE_LOC}}</p>
+				<p>{{product.TRADE_SE === "01" ? "직거래" : "택배"}}</p>
+				<br/>
+				<ion-note>시작 : {{product.SALE_START_DATE}} / 종료 : {{product.SALE_END_DATE}}</ion-note> 
+			</ion-item>   
+			<button ion-button round margin-top (click)="moreList()">더보기</button>
+		</ng-template>
+
+		<ng-template #emptyList>
+			<ion-item>
+				{{emptyMessage}}
+			</ion-item>
+		</ng-template>
+	</div>	
+
 </ion-content>

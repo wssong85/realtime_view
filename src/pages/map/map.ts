@@ -1,20 +1,21 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { } from "ionic-angular";
+import { IonicPage } from "ionic-angular";
 import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
 
+@IonicPage()
 @Component({
 	selector: "page-map",
   	templateUrl: "map.html"
 })
-export class Map {
+export class MapPage {
 
 	@ViewChild("map") mapElement: ElementRef;
 	
 	map: any;
 	
-	constructor(private geolocation: Geolocation) { }
+	constructor(public geolocation: Geolocation) { }
 
 	ionViewDidLoad() {
 		
@@ -55,8 +56,8 @@ export class Map {
 
 	resetMap(map: any) {
 
-		let zoom = map.getZoom();
-		let center = map.getCenter();
+		const zoom = map.getZoom();
+		const center = map.getCenter();
 
 		google.maps.event.trigger(map, "resize");
 

@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 
 import { Http, Headers } from '@angular/http';
-import { Index } from '../index/index';
+import { IndexPage } from '../index/index';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
@@ -69,7 +69,7 @@ export class Login {
 				console.log(res.result);
 			
 				if(res.result) {
-                    this.navCtrl.setRoot(Index);
+                    this.navCtrl.setRoot(IndexPage);
                     
 				} else {
 					this.showAlert("로그인정보를 입력해 주십시오.");

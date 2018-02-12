@@ -97,12 +97,12 @@ export class SellRegist {
   	}
   	
   	showAlert(message: any) {
-		let alert = this.alertCtrl.create({
-	  		title: "알림",
-	  		subTitle: message,
-	  		buttons: ["확인"]
-		});
-		alert.present();
+		// let alert = this.alertCtrl.create({
+	  	// 	title: "알림",
+	  	// 	subTitle: message,
+	  	// 	buttons: ["확인"]
+		// });
+		// alert.present();
   	}
   	
 }

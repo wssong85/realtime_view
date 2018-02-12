@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MenuController, AlertController } from 'ionic-angular';
+import { IonicPage, MenuController, AlertController } from 'ionic-angular';
 
+import { AlertProvider } from '../../providers/alert/alert';
+
+@IonicPage()
 @Component({
 	selector: 'page-hashtag',
   	templateUrl: 'hashtag.html'
 })
-export class Hashtag {
+export class HashtagPage {
 
 	hashtag: string = "";
 	tradeType: string = "01";
   	price: object = {lower: 0, upper: 10000000};
   
-	constructor(private menuCtrl: MenuController, private alertCtrl: AlertController, private http: HttpClient) {
+	constructor(public menuCtrl: MenuController, public http: HttpClient, public alert: AlertProvider) {
 	
 		this.menuCtrl.swipeEnable(false);
   	}
@@ -26,9 +29,9 @@ export class Hashtag {
   	
   		// TODO: 추후 서버 단에서 세션값으로 변경 시 지울 것...
   		// 일단 임의로 넣음
-  		let userId = "admin";
+  		const userId = "admin";
   	
-  		let headers = new HttpHeaders();
+  		const headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		this.http.post("http://localhost/shopping/hastag/apiSelectTbIfHashtagInterest.do", { userId: userId }, { headers: headers })
@@ -38,7 +41,7 @@ export class Hashtag {
 			
 			if(res.success) {
 				
-				let interest = res.interest;
+				const interest = res.interest;
 
 				if (interest) {
 			
@@ -49,11 +52,11 @@ export class Hashtag {
 			
 			} else {
 			
-				this.showAlert(res.message);
+				this.alert.showWithMessage(res.message);
 			}
 			
 		}, (err) => {
-			this.showAlert("failed loading json data");
+			this.alert.showWithMessage("failed loading json data");
 		});
   	}
 
@@ -67,7 +70,7 @@ export class Hashtag {
 		
 		console.log("hashtag.ts sendHashtag value => %o ", formValue);
   		
-  		let headers = new HttpHeaders();
+		const headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		this.http.post("http://localhost/shopping/hastag/apiInsertTbIfHashtagInterest.do", formValue, { headers: headers })
@@ -75,25 +78,15 @@ export class Hashtag {
 			
 			if(res.success) {
 
-				this.showAlert("관심목록을 등록했습니다.");
+				this.alert.showWithMessage("관심목록을 등록했습니다.");
 			
 			} else {
 				
-				this.showAlert(res.message);
+				this.alert.showWithMessage(res.message);
 			}
 			
 		}, (err) => {
-			this.showAlert("failed loading json data");
+			this.alert.showWithMessage("failed loading json data");
 		});
-  	}
-  	
-  	showAlert(message: string) {
-
-    	let alert = this.alertCtrl.create({
-      		title: "알림",
-      		subTitle: message,
-      		buttons: ["확인"]
-    	});
-    	alert.present();
   	}
 }

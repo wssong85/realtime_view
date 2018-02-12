@@ -14,12 +14,16 @@ import { Home } from '../pages/home/home';
 import { Login } from '../pages/login/login';
 import { Zone } from '../pages/zone/zone';
 
-import { IndexModule } from '../pages/index/index.module';
-import { BuyModule } from '../pages/buy/buy.module';
-import { HashtagModule } from '../pages/hashtag/hashtag.module';
-import { MapModule } from '../pages/map/map.module';
+import { IndexPageModule } from '../pages/index/index.module';
+import { BuyPageModule } from '../pages/buy/buy.module';
+import { BuyDetailPageModule } from '../pages/buy-detail/buy-detail.module';
+import { HashtagPageModule } from '../pages/hashtag/hashtag.module';
+import { MapPageModule } from '../pages/map/map.module';
 import { SellModule } from '../pages/sell/sell.module';
-import { FilterModule } from '../pages/filter/filter.module';
+import { FilterPageModule } from '../pages/filter/filter.module';
+
+import { AlertProvider } from '../providers/alert/alert';
+import { LoadingProvider } from '../providers/loading/loading';
 
 @NgModule({
   declarations: [
@@ -33,12 +37,13 @@ import { FilterModule } from '../pages/filter/filter.module';
 	  HttpModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
-    BuyModule,
-    HashtagModule,
-    IndexModule,
-    MapModule,
+    IndexPageModule,
+    BuyPageModule,
+    BuyDetailPageModule,
+    HashtagPageModule,
+    MapPageModule,
     SellModule,
-    FilterModule
+    FilterPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +56,9 @@ import { FilterModule } from '../pages/filter/filter.module';
     StatusBar,
     SplashScreen,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AlertProvider,
+    LoadingProvider
   ]
 })
 export class AppModule {}
