@@ -16,12 +16,10 @@ export class HashtagPage {
   	price: object = {lower: 0, upper: 10000000};
   
 	constructor(public menuCtrl: MenuController, public http: HttpClient, public alert: AlertProvider) {
-	
 		this.menuCtrl.swipeEnable(false);
   	}
   	
   	ionViewDidLoad() {
-  	
    		this.getHashtag();
   	}
   	
@@ -44,14 +42,12 @@ export class HashtagPage {
 				const interest = res.interest;
 
 				if (interest) {
-			
 					this.hashtag = interest.HASHTAG;
 					this.tradeType = interest.TRADE_SE;
   					this.price = {lower: interest.MIN_COST, upper: interest.MAX_COST};
 				}
 			
 			} else {
-			
 				this.alert.showWithMessage(res.message);
 			}
 			
@@ -77,11 +73,9 @@ export class HashtagPage {
 		.subscribe((res: any) => {
 			
 			if(res.success) {
-
 				this.alert.showWithMessage("관심목록을 등록했습니다.");
 			
 			} else {
-				
 				this.alert.showWithMessage(res.message);
 			}
 			

@@ -47,7 +47,7 @@ export class IndexPage {
 			filters: this.filters,
 			products: this.products
 		}
-	 }
+	}
 
 	ionViewDidLoad() { 
 

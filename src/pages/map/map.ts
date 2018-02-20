@@ -44,7 +44,6 @@ export class MapPage {
  			this.map.setCenter(new google.maps.LatLng(lat, lng));
  			
 		}).catch((error) => {
-		
   			console.log("Error getting location", error);
 		});
     

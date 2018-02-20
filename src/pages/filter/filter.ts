@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { AlertProvider } from '../../providers/alert/alert'
 import { IndexPage } from '../index/index';
 
+// TODO: 이전 필터 검색 정보 가지고 있기? (저장은 아니고...)
 @IonicPage()
 @Component({
     selector: 'page-filter',
@@ -46,17 +47,13 @@ export class FilterPage {
 			console.log("filter.ts sendFilter results => %o ", res);
 
 			if(res.success) {
-
 				// 일단 무조건 구매 탭으로 가게함
 				this.navCtrl.setRoot(IndexPage, { tabIdx: 1, filters: formValue, products: res.products }); 
 				//this.navCtrl.setRoot(Index, { tabIdx: this.tabIdx, results: res.results })
-			
 			} else {
 				this.alert.showWithMessage(res.message);
 			}
-			
 		}, (err) => {
-
 			this.alert.showWithMessage("failed loading json data");
 		});
 	}
@@ -66,7 +63,6 @@ export class FilterPage {
 		const now = new Date();
 
 		if (addMonth != 0) {
-
 			now.setMonth(now.getMonth() + addMonth);
 		}
 

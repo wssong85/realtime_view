@@ -15,7 +15,7 @@ declare var google;
 @IonicPage()
 @Component({
 	selector: 'page-buy',
-  	templateUrl: 'buy.html'
+	  templateUrl: 'buy.html'
 })
 export class BuyPage {
 
@@ -40,7 +40,6 @@ export class BuyPage {
 		// rootParams 데이터 처리
 		const params = this.navParams.data;
 		if (params) {
-
 			this.filters = params.filters;
 			this.products = params.products;
 		}
@@ -61,7 +60,6 @@ export class BuyPage {
 
 		// 필터를 통해서 온 경우가 아니라면
 		if (Object.keys(this.filters).length !== 0) {
-
 			// 지도 reisze 처리
 			this.resetMap(this.map);
 		}
@@ -81,12 +79,10 @@ export class BuyPage {
 			console.log("buy.ts geolocation => ", lat, lng);
 			 
 			if (this.markers.length === 0) {
-
 				this.map.setCenter(new google.maps.LatLng(lat, lng));
 			}
  			
 		}).catch((error) => {
-		
   			console.log("Error getting location", error);
 		});
     
@@ -145,11 +141,9 @@ export class BuyPage {
 			console.log("buy.ts moreList results => %o", res);
 
 			if (res.products.length === 0) {
-
 				this.alert.showWithMessage("더이상 없엉..");
 
 			} else {
-
 				// 기존 목록과 합침
 				this.products = this.products.concat(res.products);
 			}
@@ -166,19 +160,18 @@ export class BuyPage {
 	// 리스트 처리
 	processList() {
 
+		this.clearMarkers();
+
 		if (this.products.length === 0) {
 
 			this.emptyMessage = "검색된 구매목록이 없습니다.";	
 
-			this.clearMarkers();
 			this.initMap();
-
 			this.page = 0;
 
 		} else {
 
 			this.addMarkers();
-
 			this.page += 1;
 		}
 
@@ -229,23 +222,17 @@ export class BuyPage {
 			}
 		});
 
-		if (this.markers.length === 1) {
+		console.log("marker => ", this.markers);
+		console.log("marker length => ", this.markers.length);
 
-			// 마커가 1개인 경우 마커위치로 이동
-			this.map.setCenter(this.markers[0].getPosition());
-
-		} else {
-
-			// 마커가 1개 이상인 경우 bounds 값에 따라 자동 레벨 조정
-			this.map.fitBounds(bounds);
-		}
+		// 마커가 1개 이상인 경우 bounds 값에 따라 자동 레벨 조정
+		this.map.fitBounds(bounds);
 	}
 
 	// 모든 마커 지우기
 	clearMarkers() {
 
 		this.markers.forEach(marker => {
-			
 			marker.setMap(null);
 		});
 

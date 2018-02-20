@@ -15,8 +15,8 @@ export class MyApp {
 	@ViewChild(Nav) nav: Nav;
 	
   	//rootPage:any = Detail;
-	//rootPage:any = IndexPage;
-	rootPage:any = Login;
+	rootPage:any = IndexPage;
+	//rootPage:any = Login;
   
   	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     	platform.ready().then(() => {
