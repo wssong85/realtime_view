@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { AlertProvider } from '../../providers/alert/alert'
@@ -12,6 +12,7 @@ declare var google;
 
 // TODO: 마커 위치로 이동 처리? => 그러면 클릭은 언제?, 마커 순서 확인 필요
 // TODO: 서비스 클래스 처리(?) => filters
+// TODO: 목록 가져오기 하나로 합치기
 @IonicPage()
 @Component({
 	selector: 'page-buy',

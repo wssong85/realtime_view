@@ -1,8 +1,25 @@
-<ion-content>
-	<ion-list>
-    	<ion-list-header>Follow us on Twitter</ion-list-header>
-    	<ion-item>
-      		<ion-icon name="ionic" item-start></ion-icon>@ionicframework
-      	</ion-item>
-  	</ion-list>
+<ion-content text-center>
+	<ion-list *ngIf="products.length !== 0;then fullList else emptyList"></ion-list>
+
+    <ng-template #fullList>
+        <ion-item class="hand" *ngFor="let product of products; let idx = index" [ngClass]="{'btn-hover': idx === hoverIdx}" 
+        (click)="detailGo(product.PRODUCT_SEQ)" (mouseenter)="itemEnter(idx)" (mouseleave)="itemLeave()">
+            <ion-avatar item-start></ion-avatar>
+            <h2>{{product.TITLE}} 
+                <ion-badge *ngFor="let hashtag of product.HASHTAG | hashtagToArray" item-end>{{hashtag}}</ion-badge> 
+            </h2>
+            <br/>
+            <p>거래지역 : {{product.SALE_LOC}}</p>
+            <p>거래종류 : {{product.TRADE_SE === "01" ? "직거래" : "택배"}}</p>
+            <br/>
+            <ion-note>시작 : {{product.SALE_START_DATE}} / 종료 : {{product.SALE_END_DATE}}</ion-note> 
+        </ion-item>   
+        <button ion-button round margin-top (click)="initList(true)">더보기</button>
+    </ng-template>
+
+    <ng-template #emptyList>
+        <ion-item>
+            {{emptyMessage}}
+        </ion-item>
+    </ng-template>
 </ion-content>

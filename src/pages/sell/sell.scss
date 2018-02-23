@@ -1,3 +1,18 @@
 page-sell {
 
+    .d-none {
+		display: none;
+	}
+
+	.hand {
+		cursor: pointer;
+	}
+
+	.item .item-content {
+		background-color: transparent !important;
+	}
+
+	.btn-hover {
+		background-color: #bfdbef !important
+	}
 }

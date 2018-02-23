@@ -19,7 +19,8 @@ import { BuyPageModule } from '../pages/buy/buy.module';
 import { BuyDetailPageModule } from '../pages/buy-detail/buy-detail.module';
 import { HashtagPageModule } from '../pages/hashtag/hashtag.module';
 import { MapPageModule } from '../pages/map/map.module';
-import { SellModule } from '../pages/sell/sell.module';
+import { SellPageModule } from '../pages/sell/sell.module';
+import { SellDetailPageModule } from '../pages/sellDetail/sellDetail.module';
 import { FilterPageModule } from '../pages/filter/filter.module';
 
 import { AlertProvider } from '../providers/alert/alert';
@@ -27,14 +28,14 @@ import { LoadingProvider } from '../providers/loading/loading';
 
 @NgModule({
   declarations: [
-	  MyApp,
+	MyApp,
     Login,
     Zone,
     Home
   ],
   imports: [
-	  BrowserModule,
-	  HttpModule,
+	BrowserModule,
+	HttpModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
     IndexPageModule,
@@ -42,12 +43,13 @@ import { LoadingProvider } from '../providers/loading/loading';
     BuyDetailPageModule,
     HashtagPageModule,
     MapPageModule,
-    SellModule,
+    SellPageModule,
+    SellDetailPageModule,
     FilterPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-	  MyApp,
+	MyApp,
     Login,
     Zone,
     Home

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Tabs, Tab } from 'ionic-angular';
 
 import { MapPage } from '../map/map';
 import { BuyPage } from '../buy/buy';
-import { Sell } from '../sell/sell';
+import { SellPage } from '../sell/sell';
 
 import { Zone } from '../zone/zone';
 import { FilterPage } from '../filter/filter';
@@ -18,7 +18,7 @@ export class IndexPage {
 
 	tab1Root = MapPage;
 	tab2Root = BuyPage;
-	tab3Root = Sell;
+	tab3Root = SellPage;
 
 	currentIdx: number = 0;
 	filters: object = {};

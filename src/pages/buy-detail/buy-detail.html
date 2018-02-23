@@ -1,5 +1,49 @@
 <ion-content padding text-center>
 
-    {{productPrint}}<br/>
+    <!-- 이미지 -->
+    <ion-item>
+        <ion-thumbnail>
+            <ion-img src=""></ion-img>
+            <ion-img src="assets/imgs/upload/adidas_2.PNG"></ion-img>
+            <ion-img src="assets/imgs/upload/adidas_3.PNG"></ion-img>
+        </ion-thumbnail>
+    </ion-item>
+    
+    <!-- 해쉬태그 -->
+    <ion-item>
+        <ion-label stacked>해쉬태그</ion-label>
+        <ion-input type="text" readonly value="{{product.HASHTAG}}"></ion-input>
+    </ion-item>
+    
+    <!-- 거래가격 -->
+    <ion-item>
+        <ion-label stacked>거래가격</ion-label>
+        <ion-input type="text" readonly value="{{product.MIN_COST}} ~ {{product.MAX_COST}}"></ion-input>
+    </ion-item>
+    
+    <!-- 거래종류 button -->
+    <ion-item>
+        <ion-label stacked>거래종류</ion-label>
+        <ion-input type="text" readonly value="{{product.TRADE_SE === '01' ? '직거래' : '택배거래'}}"></ion-input>
+    </ion-item>
+            
+    <!-- 제목 -->
+    <ion-item>
+        <ion-label stacked>제목</ion-label>
+        <ion-input type="text" readonly value="{{product.TITLE}}"></ion-input>
+    </ion-item>
+
+     <!-- 전화번호 -->
+     <ion-item>
+        <ion-label stacked>전화번호</ion-label>
+        <ion-input type="tel" readonly value="{{product.PHONE}}"></ion-input>
+    </ion-item>
+            
+    <!-- 판매위치 -->
+    <ion-item>
+        <ion-label stacked>판매위치</ion-label>
+        <ion-input type="text" readonly value="{{product.SALE_LOC}}"></ion-input>
+    </ion-item>
+
     <button ion-button (click)="goBack()">뒤로가기</button>
 </ion-content>
