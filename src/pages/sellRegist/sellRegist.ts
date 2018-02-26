@@ -74,10 +74,7 @@ export class SellRegist {
         
 		console.log(formValue);
 		
-		
 		this.http.post("http://localhost/shopping/product/insertSellProduct.do", formValue, { headers: headers })
-		
-		.map(res => res.json())
 		
 		.subscribe(res => {
 			
