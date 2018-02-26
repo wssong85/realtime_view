@@ -6,6 +6,7 @@ import { AlertProvider } from '../../providers/alert/alert'
 import { LoadingProvider } from '../../providers/loading/loading'
 
 import { SellDetailPage } from '../sellDetail/sellDetail';
+import { SellRegistPage } from '../sellRegist/sellRegist';
 
 @Component({
 	selector: 'page-sell',
@@ -24,13 +25,21 @@ export class SellPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alert: AlertProvider, public loading: LoadingProvider) {}
     
-    ionViewDidLoad() {
-
-		console.log("buy.ts ionViewDidLoad...");
-
-		// 초기화 처리
+    //페이지들어올때마다
+    ionViewWillEnter() {
+    	// 초기화 처리
 		this.initList(false);
+	}
+	
+    ionViewDidLoad() {
     }
+    
+    ionViewDidLeave() {
+    	console.log('떠남..');
+    	
+    	this.products = [];
+    	this.hoverIdx = -1;
+	}
 
     // 초기 목록 가져오기
 	initList(isMore: boolean) {
@@ -43,12 +52,12 @@ export class SellPage {
         this.param["page"] = this.page * SellPage.LINE_SIZE;
         this.param["lineSize"] = SellPage.LINE_SIZE;
 
-        this.http.post("http://localhost/shopping/hastag/apiSelectBuyProduct.do", this.param, { headers: headers })
+        this.http.post("http://localhost/shopping/product/selectSellProductList.do", this.param, { headers: headers })
         .subscribe((res: any) => {
 
             console.log("sell.ts initList results => %o", res);
 
-            if (res.products.length === 0) {
+            if (res.data.length === 0) {
 
                 if (isMore) {
                     this.alert.showWithMessage("더이상 없엉..");
@@ -60,7 +69,7 @@ export class SellPage {
 			} else {
 
 				// 기존 목록과 합침
-                this.products = this.products.concat(res.products);
+                this.products = this.products.concat(res.data);
                 this.page += 1;
             }
             
@@ -71,6 +80,11 @@ export class SellPage {
             this.loading.hide();
             this.alert.showWithMessage("failed loading json data");
         });
+    }
+	
+    // 판매등록
+    registGo() {
+        this.navCtrl.push(SellRegistPage);
     }
 	
     // 상세보기

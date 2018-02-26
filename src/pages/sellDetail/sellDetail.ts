@@ -21,17 +21,19 @@ export class SellDetailPage {
 		}
     }
 	
-	
+	//맨처음페이지들어올때
 	ionViewDidLoad() {
 		this.init();
 	}
 	
+	//페이지들어올때마다
 	ionViewWillEnter() {
 	}
 	
 	ionViewDidEnter() {
 	}
 	
+	//페이지벗어날때마다
 	ionViewWillLeave() {
 	}
 	

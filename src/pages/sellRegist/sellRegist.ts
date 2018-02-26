@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
@@ -11,8 +11,7 @@ export class SellRegist {
 
 	cash: any = {lower: 0, upper: 10000000};
 	
-	constructor(public navCtrl: NavController,  public http: Http) {
-	
+	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
 		
 	}
 	
@@ -20,12 +19,14 @@ export class SellRegist {
 		this.init();
 	}
 	
+	//페이지들어올때마다
 	ionViewWillEnter() {
 	}
 	
 	ionViewDidEnter() {
 	}
 	
+	//페이지벗어날때마다
 	ionViewWillLeave() {
 	}
 	
@@ -68,7 +69,7 @@ export class SellRegist {
   	
   	//상품등록이벤트
   	sellRegist(formValue : any) {
-  		let headers = new Headers();
+  		const headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		console.log(formValue);
