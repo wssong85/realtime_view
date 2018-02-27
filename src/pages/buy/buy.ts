@@ -89,7 +89,9 @@ export class BuyPage {
     
     	this.map = new google.maps.Map(this.mapElement.nativeElement, {
       		zoom: 5,
-      		center: {lat: lat, lng: lng}
+            center: {lat: lat, lng: lng},
+            minZoom: 5,
+            maxZoom: 21
 		});
 	}
 	

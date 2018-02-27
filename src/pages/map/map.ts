@@ -49,7 +49,9 @@ export class MapPage {
     
     	this.map = new google.maps.Map(this.mapElement.nativeElement, {
       		zoom: 18,
-      		center: {lat: lat, lng: lng}
+            center: {lat: lat, lng: lng},
+            minZoom: 5,
+            maxZoom: 21
 		});
 	}
 

@@ -7,7 +7,7 @@ import { NavController, NavParams } from 'ionic-angular';
   	templateUrl: 'sellRegist.html'
 })
 
-export class SellRegist {
+export class SellRegistPage {
 
 	cash: any = {lower: 0, upper: 10000000};
 	
@@ -75,8 +75,7 @@ export class SellRegist {
 		console.log(formValue);
 		
 		this.http.post("http://localhost/shopping/product/insertSellProduct.do", formValue, { headers: headers })
-		
-		.subscribe(res => {
+		.subscribe((res: any)  => {
 			
 			if(res.success) {
 			
@@ -102,5 +101,4 @@ export class SellRegist {
 		// });
 		// alert.present();
   	}
-  	
 }

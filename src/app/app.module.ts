@@ -21,6 +21,7 @@ import { HashtagPageModule } from '../pages/hashtag/hashtag.module';
 import { MapPageModule } from '../pages/map/map.module';
 import { SellPageModule } from '../pages/sell/sell.module';
 import { SellDetailPageModule } from '../pages/sellDetail/sellDetail.module';
+import { SellRegistPageModule } from '../pages/sellRegist/sellRegist.module';
 import { FilterPageModule } from '../pages/filter/filter.module';
 
 import { AlertProvider } from '../providers/alert/alert';
@@ -45,6 +46,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     MapPageModule,
     SellPageModule,
     SellDetailPageModule,
+    SellRegistPageModule,
     FilterPageModule
   ],
   bootstrap: [IonicApp],

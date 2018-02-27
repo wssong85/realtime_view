@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { SellRegist } from './sellRegist';
+import { SellRegistPage } from './sellRegist';
 
 @NgModule({
 	declarations: [
-    	SellRegist,
+    	SellRegistPage,
   	],
   	imports: [
-    	IonicPageModule.forChild(SellRegist),
-  	],
-  	entryComponents: [
-    	SellRegist,
+    	IonicPageModule.forChild(SellRegistPage),
   	]
 })
-
-export class SellRegistModule {}
+export class SellRegistPageModule {}
