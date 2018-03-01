@@ -34,20 +34,13 @@
 		  	<ion-input type="tel" placeholder="Phone" readonly value="010-0000-0000"></ion-input>
 		</ion-item>
     	
-    	<!-- 거래종류 button -->
+    	<!-- 거래종류 -->
 		<ion-item>
 			<ion-label stacked>거래종류</ion-label>
-			
-			<!-- 
-			<button ion-button round icon-start>
-				<ion-icon name="star"></ion-icon>
-		      	직거래
-			</button>
-			<button ion-button round icon-start>
-				<ion-icon name="star"></ion-icon>
-		      	택배
-			</button>
-			 -->
+			<ion-select name="tradeSe" [(ngModel)]="tradeSe" >
+    			<ion-option value="01">직거래</ion-option>
+    			<ion-option value="02">택배</ion-option>
+  	  		</ion-select>
 		</ion-item>
 		    	
     	<!-- 제목 -->

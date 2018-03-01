@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
+
+import { SellPage } from '../sell/sell';
 
 @Component({
 	selector: 'page-sellRegist',
@@ -9,10 +11,16 @@ import { NavController, NavParams } from 'ionic-angular';
 
 export class SellRegistPage {
 
-	cash: any = {lower: 0, upper: 10000000};
+	rootPage:any = SellPage;
 	
-	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient) {
-		
+	cash: any = {lower: 0, upper: 1000000};
+	title   : string = "아디다스 직거래 원합니다.";
+	tradeSe : string = "01";
+	saleSe  : string = "01";
+	saleLoc : string = "신촌 현대백화점";
+	
+	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController) {
+	
 	}
 	
 	ionViewDidLoad() {
@@ -44,7 +52,7 @@ export class SellRegistPage {
   
   	//onLoad
   	init() {
-  		console.log("regist");
+  		//console.log("regist");
   	}
   	
   	//파일변경 이벤트
@@ -67,7 +75,14 @@ export class SellRegistPage {
   		console.log(v);
   	}
   	
-  	//상품등록이벤트
+  	//상품목록 이동
+  	sellList(formValue : any) {
+  	
+  		this.navCtrl.push(SellPage);
+  		
+  	}
+  	
+  	//상품등록
   	sellRegist(formValue : any) {
   		const headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
@@ -83,6 +98,9 @@ export class SellRegistPage {
 				console.log(res.result);
 			
 				this.showAlert("상품을 등록했습니다.");
+				//this.navCtrl.push(SellPage);
+				this.sellList();
+				
 			
 			} else {
 				this.showAlert(res.message);
@@ -93,12 +111,12 @@ export class SellRegistPage {
 		});
   	}
   	
-  	showAlert(message: any) {
-		// let alert = this.alertCtrl.create({
-	  	// 	title: "알림",
-	  	// 	subTitle: message,
-	  	// 	buttons: ["확인"]
-		// });
-		// alert.present();
+  	showAlert(message: any, goPage: any) {
+		 let alert = this.alertCtrl.create({
+	  	 	title: "알림",
+	  	 	subTitle: message,
+	  	 	buttons: ["확인"]
+		 });
+		alert.present();
   	}
 }

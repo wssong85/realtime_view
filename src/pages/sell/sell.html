@@ -14,9 +14,7 @@
             <br/>
             <ion-note>시작 : {{product.SALE_START_DATE}} / 종료 : {{product.SALE_END_DATE}}</ion-note> 
         </ion-item>
-        <div>
         <button ion-button round margin-top (click)="initList(true)">더보기</button>
-        </div>
         <ion-icon name="add-circle" (click)="registGo()"></ion-icon>
     </ng-template>
 
@@ -24,5 +22,6 @@
         <ion-item>
             {{emptyMessage}}
         </ion-item>
+        <ion-icon name="add-circle" (click)="registGo()"></ion-icon>
     </ng-template>
 </ion-content>

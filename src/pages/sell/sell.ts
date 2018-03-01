@@ -63,7 +63,7 @@ export class SellPage {
                     this.alert.showWithMessage("더이상 없엉..");
 
                 } else {
-                    this.emptyMessage = "검색된 구매목록이 없습니다.";	
+                    this.emptyMessage = "검색된 판매목록이 없습니다.";	
                     this.page = 0;
                 }
 			} else {

@@ -8,6 +8,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SellDetailPage {
 
+	cash: any = {lower: 0, upper: 1000000};
+	tradeSe : string = "01";
+	saleSe  : string = "01";
+	saleLoc : string = "신촌 현대백화점";
+	
     product:object = {};
 
     productPrint: string = ""; // 테스트 변수 추후 지울 것...

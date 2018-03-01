@@ -4,26 +4,26 @@
 	    	<!-- 제목 -->
 			<ion-item>
 				<ion-label stacked>제목</ion-label>
-				<ion-input type="text" name="title" placeholder="제목을 입력해주세요." value="아디다스 직거래 원합니다."></ion-input>
+				<ion-input type="text" name="title" placeholder="제목을 입력해주세요." value="" [(ngModel)]="title"></ion-input>
 			</ion-item>	
 			
 	    	<!-- hashtag -->
 			<ion-item>
 				<ion-label stacked>해쉬태그</ion-label>
-				<ion-input type="text" name="hashtag" placeholder="해시태그를 입력해주세요." value="#아디다스#신상" (change)="hashtagChange($event.target.value)"></ion-input>
+				<ion-input type="text" name="hashtag" placeholder="해시태그를 입력해주세요." [(ngModel)]="hashtag" (change)="hashtagChange($event.target.value)"></ion-input>
 			</ion-item>
 	    	
 	    	<!-- 판매가격 -->
 	    	<ion-list-header text-left>
 	    		<ion-label stacked>판매가격</ion-label> 
 	    		<ion-badge item-end color="secondary">0</ion-badge>
-	    		<ion-badge item-end color="secondary">10000000</ion-badge>
+	    		<ion-badge item-end color="secondary">1000000</ion-badge>
 	    	</ion-list-header>
 	    
 	    	<ion-item>
-	      		<ion-range min="0" max="10000000" pin="true" dualKnobs="true"  pin="true" step="1000" min="0" max="10000000" name="cash" [(ngModel)]="cash" color="secondary">
+	      		<ion-range min="0" max="10000000" pin="true" dualKnobs="true"  pin="true" step="1000" min="0" max="1000000" name="cash" [(ngModel)]="cash" color="secondary">
 	        		<ion-label range-left>0</ion-label>
-	        		<ion-label range-right>10000000</ion-label>
+	        		<ion-label range-right>1000000</ion-label>
 	      		</ion-range>
 	      		
 	    	</ion-item>
@@ -42,9 +42,9 @@
 	    	<!-- 거래종류 -->
 			<ion-item>
 				<ion-label stacked>거래종류</ion-label>
-				<ion-select name="tradeSe" [(ngModel)]="tradeSe">
-	    			<ion-option value="1">직거래</ion-option>
-	    			<ion-option value="2">택배</ion-option>
+				<ion-select name="tradeSe" [(ngModel)]="tradeSe" >
+	    			<ion-option value="01">직거래</ion-option>
+	    			<ion-option value="02">택배</ion-option>
 	  	  		</ion-select>
 			</ion-item>
 	
@@ -52,8 +52,8 @@
 			<ion-item>
 				<ion-label stacked>판매여부</ion-label>
 				<ion-select name="saleSe" [(ngModel)]="saleSe">
-	    			<ion-option value="1">판매중</ion-option>
-	    			<ion-option value="2">판매완료</ion-option>
+	    			<ion-option value="01" selected>판매중</ion-option>
+	    			<ion-option value="02">판매완료</ion-option>
 	  	  		</ion-select>
 			</ion-item>
 	    	
@@ -68,14 +68,14 @@
 	    	<!-- 판매위치 -->
 			<ion-item>
 				<ion-label stacked>판매위치</ion-label>
-	<!-- 			<ion-input type="text" readonly value=""></ion-input> -->
-				<ion-input type="text" value=""></ion-input>
+				<ion-input type="text" name="saleLoc" [(ngModel)]="saleLoc"></ion-input>
 				<ion-icon ios="ios-locate" md="md-locate"></ion-icon>
 			</ion-item>
 			
 	 	</form>
 	 	
 		<!-- 등록버튼 -->
+		<button ion-button round outline (click)="sellList()">목록</button>
 		<button ion-button round outline (click)="sellRegist(form.value)">등록</button>
 			
   	</div>
