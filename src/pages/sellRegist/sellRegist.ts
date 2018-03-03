@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams} from 'ionic-angular';
 
 import { SellPage } from '../sell/sell';
+import { AlertProvider } from '../../providers/alert/alert';
+
 
 @Component({
 	selector: 'page-sellRegist',
@@ -19,7 +21,7 @@ export class SellRegistPage {
 	saleSe  : string = "01";
 	saleLoc : string = "신촌 현대백화점";
 	
-	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alert: AlertProvider) {
 	
 	}
 	
@@ -97,26 +99,17 @@ export class SellRegistPage {
 				console.log("==>" + res.result);
 				console.log(res.result);
 			
-				this.showAlert("상품을 등록했습니다.");
+				this.alert.showWithMessage("상품을 등록했습니다.");
 				//this.navCtrl.push(SellPage);
 				this.sellList();
 				
 			
 			} else {
-				this.showAlert(res.message);
+				this.alert.showWithMessage(res.message);
 			}
 			
 		}, (err) => {
-			this.showAlert("failed loading json data");
+			this.alert.showWithMessage("failed loading json data");
 		});
-  	}
-  	
-  	showAlert(message: any, goPage: any) {
-		 let alert = this.alertCtrl.create({
-	  	 	title: "알림",
-	  	 	subTitle: message,
-	  	 	buttons: ["확인"]
-		 });
-		alert.present();
   	}
 }
