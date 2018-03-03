@@ -78,7 +78,7 @@ export class SellRegistPage {
   	}
   	
   	//상품목록 이동
-  	sellList(formValue : any) {
+  	sellList() {
   	
   		this.navCtrl.push(SellPage);
   		
