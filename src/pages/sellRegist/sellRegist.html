@@ -4,13 +4,14 @@
 	    	<!-- 제목 -->
 			<ion-item>
 				<ion-label stacked>제목</ion-label>
-				<ion-input type="text" name="title" placeholder="제목을 입력해주세요." value="" [(ngModel)]="title"></ion-input>
+				<ion-input type="text" name="title" placeholder="제목을 입력해주세요." [(ngModel)]="title"></ion-input>
 			</ion-item>	
 			
 	    	<!-- hashtag -->
 			<ion-item>
 				<ion-label stacked>해쉬태그</ion-label>
-				<ion-input type="text" name="hashtag" placeholder="해시태그를 입력해주세요." [(ngModel)]="hashtag" (change)="hashtagChange($event.target.value)"></ion-input>
+				<ion-input type="text" name="hashtagOrg" placeholder="해시태그를 입력해주세요." [(ngModel)]="hashtagOrg" (change)="hashtagChange($event.target.value)"></ion-input>
+				<ion-input type="hidden" id="hashtag" name="hashtag" [(ngModel)]="hashtag" value=""></ion-input>
 			</ion-item>
 	    	
 	    	<!-- 판매가격 -->
