@@ -21,6 +21,7 @@ export class SellRegistPage {
 	tradeSe : string = "01";
 	saleSe  : string = "01";
 	saleLoc : string = "검색...";
+	hashtag : String = "";
 	
 	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public http: HttpClient, public alert: AlertProvider) {
 	
@@ -75,7 +76,10 @@ export class SellRegistPage {
   	
   	//해시태그변경 이벤트
   	hashtagChange(v) {
-  		console.log(v);
+  		
+  		console.log(v.split("#").join());
+  		
+  		this.hashtag = v.split("#").join();
   	}
   	
   	//상품목록 이동

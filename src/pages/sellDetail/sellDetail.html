@@ -15,7 +15,7 @@
 		<ion-item>
 			<ion-label stacked>hashtag</ion-label>
 <!-- 			<ion-input type="text" readonly value="#아디다스 #오리지널 #중고"></ion-input> -->
-			<ion-input type="text" placeholder="hashtag" readonly value="#아디다스 #오리지널 #중고"></ion-input>
+			<ion-input type="text" placeholder="hashtag" value="#아디다스 #오리지널 #중고" [(ngModel)]="hashtagOrg" ></ion-input>
 		</ion-item>
     	
     	<!-- 거래가격 -->
@@ -53,10 +53,9 @@
     	<!-- 판매위치 -->
 		<ion-item>
 			<ion-label stacked>판매위치</ion-label>
-<!-- 			<ion-input type="text" readonly value=""></ion-input> -->
-			<ion-input type="text" readonly value=""></ion-input>
+			<ion-input type="text" name="saleLoc" [(ngModel)]="saleLoc" value=""></ion-input>
 			<ion-icon ios="ios-locate" md="md-locate"></ion-icon>
-        </ion-item>
+		</ion-item>
         
         <button ion-button (click)="goBack()">뒤로가기</button>
 		

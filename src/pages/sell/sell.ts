@@ -89,7 +89,6 @@ export class SellPage {
 	
     // 상세보기
     detailGo(id: number) {
-
         const product = this.products.find(obj => { return obj.PRODUCT_SEQ === id });
         this.navCtrl.push(SellDetailPage, {product: product});
     }
