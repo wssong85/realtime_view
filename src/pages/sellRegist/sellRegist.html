@@ -65,13 +65,13 @@
 	    		</div>
 	    	</ion-item>
 	    	
-	    	<!-- 판매위치 -->
-			<ion-item>
-				<ion-label stacked>판매위치</ion-label>
-				<ion-input type="text" name="saleLoc" [(ngModel)]="saleLoc"></ion-input>
-				<ion-icon ios="ios-locate" md="md-locate"></ion-icon>
+            <!-- 판매위치 -->
+            <ion-item>
+                <button ion-button (click)="searchGo()" >판매위치 검색</button>
 			</ion-item>
-			
+			<ion-item>
+                <ion-input type="text" name="saleLoc" [(ngModel)]="saleLoc" (click)="searchGo"></ion-input>
+			</ion-item>
 	 	</form>
 	 	
 		<!-- 등록버튼 -->

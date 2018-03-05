@@ -46,8 +46,8 @@ export class SellPage {
 
 		this.loading.show("잠시 기둘...");
 	
-        const headers = new HttpHeaders();
-        headers.append("Content-Type", "application/json; charset=UTF-8");
+        let headers = new HttpHeaders();
+		headers = headers.append("Content-Type", "application/json; charset=UTF-8");
 
         this.param["page"] = this.page * SellPage.LINE_SIZE;
         this.param["lineSize"] = SellPage.LINE_SIZE;

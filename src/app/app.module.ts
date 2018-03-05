@@ -19,6 +19,7 @@ import { BuyPageModule } from '../pages/buy/buy.module';
 import { BuyDetailPageModule } from '../pages/buy-detail/buy-detail.module';
 import { HashtagPageModule } from '../pages/hashtag/hashtag.module';
 import { MapPageModule } from '../pages/map/map.module';
+import { MapSearchPageModule } from '../pages/map-search/map-search.module';
 import { SellPageModule } from '../pages/sell/sell.module';
 import { SellDetailPageModule } from '../pages/sellDetail/sellDetail.module';
 import { SellRegistPageModule } from '../pages/sellRegist/sellRegist.module';
@@ -44,6 +45,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     BuyDetailPageModule,
     HashtagPageModule,
     MapPageModule,
+    MapSearchPageModule,
     SellPageModule,
     SellDetailPageModule,
     SellRegistPageModule,

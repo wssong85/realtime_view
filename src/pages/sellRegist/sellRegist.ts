@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NavController, NavParams} from 'ionic-angular';
+import { ModalController, NavController, NavParams} from 'ionic-angular';
 
 import { SellPage } from '../sell/sell';
+import { MapSearchPage } from '../map-search/map-search'
+
 import { AlertProvider } from '../../providers/alert/alert';
 
 
@@ -10,7 +12,6 @@ import { AlertProvider } from '../../providers/alert/alert';
 	selector: 'page-sellRegist',
   	templateUrl: 'sellRegist.html'
 })
-
 export class SellRegistPage {
 
 	rootPage:any = SellPage;
@@ -19,9 +20,9 @@ export class SellRegistPage {
 	title   : string = "아디다스 직거래 원합니다.";
 	tradeSe : string = "01";
 	saleSe  : string = "01";
-	saleLoc : string = "신촌 현대백화점";
+	saleLoc : string = "검색...";
 	
-	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alert: AlertProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public http: HttpClient, public alert: AlertProvider) {
 	
 	}
 	
@@ -86,8 +87,9 @@ export class SellRegistPage {
   	
   	//상품등록
   	sellRegist(formValue : any) {
-  		const headers = new HttpHeaders();
-        headers.append("Content-Type", "application/json; charset=UTF-8");
+          
+        let headers = new HttpHeaders();
+		headers = headers.append("Content-Type", "application/json; charset=UTF-8");
         
 		console.log(formValue);
 		
@@ -111,5 +113,17 @@ export class SellRegistPage {
 		}, (err) => {
 			this.alert.showWithMessage("failed loading json data");
 		});
-  	}
+    }
+    
+    searchGo() {
+
+        let modal = this.modalCtrl.create(MapSearchPage);
+
+        modal.onDidDismiss(data => {
+            console.log("sellRegist.ts data = %o", data);
+            this.saleLoc = data.location;
+        });
+
+        modal.present();
+    }
 }

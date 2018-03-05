@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>판매위치 검색</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center>
+    
+    <ion-list>
+        <ion-item>
+            <ion-label fixed>좌표: </ion-label>
+            <ion-input type="text" name="coordinate" [(ngModel)]="coordinate" readonly ></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label fixed>위치: </ion-label>
+            <ion-input type="text" name="location" [(ngModel)]="location" readonly></ion-input>
+        </ion-item>
+    </ion-list>
+        
+    <div #map id="map"></div>
+
+    <button ion-button margin-top (click)="confirm()">확인</button>
+        
+</ion-content>

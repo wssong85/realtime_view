@@ -38,8 +38,8 @@ export class FilterPage {
 		  
 		console.log("filter.ts sendFilter value => %o ", formValue);
 		  
-		const headers = new HttpHeaders();
-		headers.append("Content-Type", "application/json; charset=UTF-8");
+		let headers = new HttpHeaders();
+		headers = headers.append("Content-Type", "application/json; charset=UTF-8");
 		
 		this.http.post("http://localhost/shopping/hastag/apiSelectBuyProduct.do", formValue, { headers: headers })
 		.subscribe((res: any) => {

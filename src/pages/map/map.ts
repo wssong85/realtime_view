@@ -18,7 +18,6 @@ export class MapPage {
 	constructor(public geolocation: Geolocation) { }
 
 	ionViewDidLoad() {
-		
    		this.initMap();
 	}
 	  

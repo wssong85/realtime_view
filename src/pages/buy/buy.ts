@@ -102,8 +102,8 @@ export class BuyPage {
 	
 		if (Object.keys(this.filters).length === 0 && this.products.length === 0) {
 
-			const headers = new HttpHeaders();
-			headers.append("Content-Type", "application/json; charset=UTF-8");
+			let headers = new HttpHeaders();
+			headers = headers.append("Content-Type", "application/json; charset=UTF-8");
 
 			this.http.post("http://localhost/shopping/hastag/apiSelectBuyProduct.do", {}, { headers: headers })
 			.subscribe((res: any) => {
@@ -127,8 +127,8 @@ export class BuyPage {
 	// 더보기 
 	moreList() {
 
-		const headers = new HttpHeaders();
-		headers.append("Content-Type", "application/json; charset=UTF-8");
+		let headers = new HttpHeaders();
+		headers = headers.append("Content-Type", "application/json; charset=UTF-8");
 
 		this.filters["page"] = this.page * BuyPage.LINE_SIZE;
 		this.filters["lineSize"] = BuyPage.LINE_SIZE
@@ -141,17 +141,25 @@ export class BuyPage {
 		this.http.post("http://localhost/shopping/hastag/apiSelectBuyProduct.do", this.filters, { headers: headers })
 		.subscribe((res: any) => {
 
-			console.log("buy.ts moreList results => %o", res);
-
-			if (res.products.length === 0) {
-				this.alert.showWithMessage("더이상 없엉..");
-
+            console.log("buy.ts moreList results => %o", res);
+            
+            if(res.success) {
+			
+				if (res.products.length === 0) {
+                    this.alert.showWithMessage("더이상 없엉..");
+    
+                } else {
+                    // 기존 목록과 합침
+                    this.products = this.products.concat(res.products);
+                }
+    
+                this.processList();
+			
 			} else {
-				// 기존 목록과 합침
-				this.products = this.products.concat(res.products);
+                
+                this.loading.hide();
+				this.alert.showWithMessage(res.message);
 			}
-
-			this.processList();
 
 		}, (err) => {
 
