@@ -13,6 +13,8 @@ declare var google;
 // TODO: 마커 위치로 이동 처리? => 그러면 클릭은 언제?, 마커 순서 확인 필요
 // TODO: 서비스 클래스 처리(?) => filters
 // TODO: 목록 가져오기 하나로 합치기
+// TODO: 반경 검색 
+// TODO: 반경 검색 + 필터 검색
 @IonicPage()
 @Component({
 	selector: 'page-buy',
@@ -29,7 +31,8 @@ export class BuyPage {
 
 	products: any[]  = [];
 	emptyMessage: string = "";
-	filters: object = {}; 
+    filters: object = {}; 
+    points: any = {};
 
 	map: any;
 	markers: any[] = [];
@@ -42,8 +45,9 @@ export class BuyPage {
 		const params = this.navParams.data;
 		if (params) {
 			this.filters = params.filters;
-			this.products = params.products;
-		}
+            this.products = params.products;
+            this.points = params.points;
+        }
 	}
 	
 	ionViewDidLoad() {
@@ -59,13 +63,13 @@ export class BuyPage {
 
 		console.log("buy.ts ionViewDidEnter...");
 
-		// 필터를 통해서 온 경우가 아니라면
-		if (Object.keys(this.filters).length !== 0) {
+		// 장소나 필터를 통해서 온 경우가 아니라면
+		if (Object.keys(this.points).length !== 0 || Object.keys(this.filters).length !== 0) {
 			// 지도 reisze 처리
 			this.resetMap(this.map);
 		}
 	}
-	  
+	
 	// 지도 초기화
   	initMap() {
     
@@ -99,8 +103,8 @@ export class BuyPage {
 	initList() {
 
 		this.loading.show("잠시 기둘...");
-	
-		if (Object.keys(this.filters).length === 0 && this.products.length === 0) {
+
+		if (Object.keys(this.points).length === 0 && (Object.keys(this.filters).length === 0 && this.products.length === 0)) {
 
 			let headers = new HttpHeaders();
 			headers = headers.append("Content-Type", "application/json; charset=UTF-8");
@@ -115,12 +119,16 @@ export class BuyPage {
 
 			}, (err) => {
 
-				this.loading. hide();
+				this.loading.hide();
 				this.alert.showWithMessage("failed loading json data");
 			});
 		} else {
 
-			this.processList();
+            if (Object.keys(this.points).length === 0) {
+                this.processList();
+            } else {
+                this.searchRadius();
+            }
 		}
 	}
 
@@ -132,8 +140,6 @@ export class BuyPage {
 
 		this.filters["page"] = this.page * BuyPage.LINE_SIZE;
 		this.filters["lineSize"] = BuyPage.LINE_SIZE
-
-		console.log(this.filters);
 
 		// 로딩 화면을 보여줌
 		this.loading.show("잠시 기둘...");
@@ -187,7 +193,21 @@ export class BuyPage {
 		}
 
 		this.loading.hide();
-	}
+    }
+    
+    searchRadius() {
+    
+        this.addMarker(this.points.x, this.points.y, "", "");
+
+        // 일단은 검색 목록이 없는걸로...
+        this.products.length = 0;
+        this.emptyMessage = "검색된 구매목록이 없습니다.";	
+
+        console.log("marker => ", this.markers);
+        console.log("marker length => ", this.markers.length);
+
+        this.loading.hide();
+    }
 
 	// 지도 리셋
 	resetMap(map: any) {
@@ -199,46 +219,52 @@ export class BuyPage {
 
 		map.setZoom(zoom);
 		map.setCenter(center);
-	}
+    }
 
 	// 마커 추가
 	addMarkers() {
 
-		const bounds = new google.maps.LatLngBounds();
-
-		// 마커 찍기
 		this.products.forEach(obj => {
 
 			const coords = obj.SALE_COORDINATE.split(",");
 
 			// 좌표이므로 무조건 2개이여야 함
 			if (coords.length === 2) {
-
-				const marker = new google.maps.Marker({
-					position: new google.maps.LatLng(Number(coords[1]), Number(coords[0])),
-					map: this.map,
-					title: obj.TITLE
-				});
-
-				const infoWindow = new google.maps.InfoWindow({
-					content: `제목 : ${obj.TITLE} <br/> 내용 : ${obj.CONTENT}`
-				});
-
-				marker.addListener("click", function() {
-					infoWindow.open(this.map, marker);
-				});
-
-				this.markers.push(marker);
-				bounds.extend(marker.getPosition());
+                this.addMarker(Number(coords[0]), Number(coords[1]), obj.TITLE, `제목 : ${obj.TITLE} <br/> 내용 : ${obj.CONTENT}`);   
 			}
-		});
+        });
 
-		console.log("marker => ", this.markers);
-		console.log("marker length => ", this.markers.length);
+        console.log("addMarkers => ", this.markers);
+        console.log("addMarkers length => ", this.markers.length);
+    }
+    
+    addMarker(x: any, y: any, title: string, content: string) {
 
-		// 마커가 1개 이상인 경우 bounds 값에 따라 자동 레벨 조정
+        const bounds = new google.maps.LatLngBounds();
+
+        const marker = new google.maps.Marker({
+            position: new google.maps.LatLng(y, x),
+            map: this.map,
+            title: title
+        });
+
+        if (content) {
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: content
+            });
+    
+            marker.addListener("click", function() {
+                infoWindow.open(this.map, marker);
+            });
+        }
+        
+        this.markers.push(marker);
+        bounds.extend(marker.getPosition());
+
+        //  bounds 값에 따라 자동 레벨 조정
 		this.map.fitBounds(bounds);
-	}
+    }
 
 	// 모든 마커 지우기
 	clearMarkers() {

@@ -22,7 +22,8 @@ export class IndexPage {
 
 	currentIdx: number = 0;
 	filters: object = {};
-	products: any[] = [];
+    products: any[] = [];
+    points: object = {};
 
 	tabRootParams:object = {};
 	
@@ -31,7 +32,10 @@ export class IndexPage {
 		// navParams 처리
 		const tabIdx = this.navParams.get("tabIdx");
 		const filters = this.navParams.get("filters");
-		const products = this.navParams.get("products");
+        const products = this.navParams.get("products");
+        const points = this.navParams.get("points");
+
+        console.log(this.navParams);
 		
 		// tabIdx 값이 숫자이고 0 이상 
 		if (!isNaN(tabIdx) && tabIdx >= 0) {
@@ -40,12 +44,14 @@ export class IndexPage {
 		}
 		
 		this.filters = filters || {};		// 필터를 통해서 왔는지 여부
-		this.products = products || []; 	// 필터 검색 결과
+        this.products = products || []; 	// 필터 검색 결과
+        this.points = points || {};         // 장소 검색 결과
 
 		// 탭으로 보낼 데이터 설정
 		this.tabRootParams = {
 			filters: this.filters,
-			products: this.products
+            products: this.products,
+            points: this.points
 		}
 	}
 
