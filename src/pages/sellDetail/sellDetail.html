@@ -1,7 +1,6 @@
 <ion-content padding text-center>
     
-    {{productPrint}}
-    
+		<ion-input type="hidden" placeholder="productSeq" [(ngModel)]="productSeq" ></ion-input>
     	<!-- 이미지 -->
     	<ion-item>
 	    	<ion-thumbnail>
@@ -14,23 +13,27 @@
     	<!-- hashtag -->
 		<ion-item>
 			<ion-label stacked>hashtag</ion-label>
-<!-- 			<ion-input type="text" readonly value="#아디다스 #오리지널 #중고"></ion-input> -->
-			<ion-input type="text" placeholder="hashtag" value="#아디다스 #오리지널 #중고" [(ngModel)]="hashtagOrg" ></ion-input>
+			<ion-input type="text" placeholder="hashtag" value="" [(ngModel)]="hashtagOrg" ></ion-input>
 		</ion-item>
-    	
-    	<!-- 거래가격 -->
+		
+		<!-- 판매가격 -->
+		<ion-list-header text-left>
+			<ion-label stacked>판매가격</ion-label>
+			<ion-badge item-end color="secondary">{{cash.lower}}</ion-badge>
+			<ion-badge item-end color="secondary">{{cash.upper}}</ion-badge>
+		</ion-list-header>
+	
 		<ion-item>
-			<ion-label stacked>거래가격</ion-label>
-			<ion-range min="0" max="9999999" [(ngModel)]="cash" color="secondary">
+			<ion-range min="0" max="10000000" pin="true" dualKnobs="true"  pin="true" step="1000" min="0" max="1000000" name="cash" [(ngModel)]="cash" color="secondary">
 				<ion-label range-left>0</ion-label>
-				<ion-label range-right>9999999</ion-label>
+				<ion-label range-right>1000000</ion-label>
 			</ion-range>
+			
 		</ion-item>
-    	
+	    	
     	<!-- 전화번호 -->
     	<ion-item>
 			<ion-label stacked>Phone</ion-label>
-<!-- 		  	<ion-input type="tel" readonly value="010-0000-0000"></ion-input> -->
 		  	<ion-input type="tel" placeholder="Phone" readonly value="010-0000-0000"></ion-input>
 		</ion-item>
     	
@@ -46,8 +49,7 @@
     	<!-- 제목 -->
 		<ion-item>
 			<ion-label stacked>제목</ion-label>
-<!-- 			<ion-input type="text" readonly value="오리지널A급판매합니다"></ion-input> -->
-			<ion-input type="text" readonly value="오리지널A급판매합니다"></ion-input>
+			<ion-input type="text" [(ngModel)]="title"></ion-input>
 		</ion-item>
 		    	
     	<!-- 판매위치 -->

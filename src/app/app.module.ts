@@ -64,7 +64,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertProvider,
-    LoadingProvider
+    LoadingProvider,
   ]
 })
 export class AppModule {}
