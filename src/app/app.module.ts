@@ -8,6 +8,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { HttpModule } from '@angular/http'
 import { HttpClientModule } from '@angular/common/http';
 
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 
@@ -65,6 +68,9 @@ import { LoadingProvider } from '../providers/loading/loading';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertProvider,
     LoadingProvider,
+    File,
+    FileTransfer,
+    FileTransferObject
   ]
 })
 export class AppModule {}

@@ -78,7 +78,7 @@ export class SellDetailPage {
 			
 			//데이터셋팅
 			if(res.success) {
-				console.log(product);
+				//console.log(product);
 				if (product) {
 					this.productSeq = product.PRODUCT_SEQ;
 					this.hashtagOrg = product.HASHTAG;
