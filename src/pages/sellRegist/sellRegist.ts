@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ModalController, NavController, NavParams} from 'ionic-angular';
+import { NavController, NavParams} from 'ionic-angular';
 
 import { SellPage } from '../sell/sell';
-import { MapSearchPage } from '../map-search/map-search'
-
 import { AlertProvider } from '../../providers/alert/alert';
 
-//import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 //import { Camera, CameraOptions, CameraPopoverOptions} from '@ionic-native/camera';
 
 @Component({
 	selector: 'page-sellRegist',
   	templateUrl: 'sellRegist.html'
 })
+
 export class SellRegistPage {
 
 	rootPage:any = SellPage;
@@ -22,14 +22,21 @@ export class SellRegistPage {
 	title   : string = "아디다스 직거래 원합니다.";
 	tradeSe : string = "01";
 	saleSe  : string = "01";
-	saleLoc : string = "검색...";
+	saleLoc : string = "신촌 현대백화점";
 	hashtag : String = "";
 	
-	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public http: HttpClient, public alert: AlertProvider) {
 	
-		//const fileTransfer: FileTransferObject = this.transfer.create();
+	constructor(public navCtrl: NavController, public navParams: NavParams, 
+		public http: HttpClient, public alert: AlertProvider,
+		private file: File,
+		private transfer: FileTransfer) {
+	
+		//const fileTransfer1: FileTransferObject = this.transfer.create();
 		//fileTransfer.abort();
 	}
+
+	
+
 	
 	ionViewDidLoad() {
 		this.init();
@@ -64,24 +71,36 @@ export class SellRegistPage {
   	}
 
   	//파일변경 이벤트
-  	fileChange(event, formValue) {
-  		
+  	fileChange(event, formValue, id) {
+
+		const fileTransfer: FileTransferObject = this.transfer.create();
+		fileTransfer.abort();
+
+		const headers = new HttpHeaders();
+		headers.append("Content-Type", "application/json; charset=UTF-8");
+		
+
 		//console.log(event);
-		//console.log(event.target.files);
-		//console.log(formValue);
+		console.log(event.target.files);
+		console.log(id);
+		console.log(formValue);
 		
-		// let options: FileUploadOptions = {
-	    // 	fileKey: 'file',
-	    //  	fileName: 'name.jpg',
-	    // 	headers: {}
-		// }
+		let options: FileUploadOptions = {
+	    	fileKey: 'file'+id,
+	     	fileName: event.target.files[0].name,
+	    	headers: headers
+		}
+
 		
-		// console.log(options);
+		console.log(1);
 		
-		//fileTransfer.upload('<file path>', '<api endpoint>', options)
-		//.then((data) => {
-		//}, (err) => {
-		//})
+		fileTransfer.upload('http://localhost/com/file/apiInsertTbFileMaster.do', 'http://localhost/com/file/apiInsertTbFileMaster.do', options)
+		.then((data) => {
+			console.log(3);
+		}, (err) => {
+			console.log(4);
+		})
+		console.log(2);
 		
 		
 		//TODO 파일 확장자 검사
@@ -138,17 +157,5 @@ export class SellRegistPage {
 		}, (err) => {
 			this.alert.showWithMessage("failed loading json data");
 		});
-    }
-    
-    searchGo() {
-
-        let modal = this.modalCtrl.create(MapSearchPage);
-
-        modal.onDidDismiss(data => {
-            console.log("sellRegist.ts data = %o", data);
-            this.saleLoc = data.location;
-        });
-
-        modal.present();
-    }
+  	}
 }
