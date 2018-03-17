@@ -13,6 +13,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 
+import { IndexPage } from '../index/index';
+
 @Component({
   selector: 'page-zone',
   templateUrl: 'zone.html'
@@ -29,6 +31,15 @@ export class Zone {
   	placeNames: any;
   	
   	//result: any;
+  	
+  	
+  	loadMap(x, y) {
+  		//console.log(x);
+  		//console.log(y);
+
+  		this.navCtrl.setRoot(IndexPage, { tabIdx: 1, points : {"x":x, "y":y} });
+  	
+  	}
 
 	loadPlace(formValue: any) {
 		
@@ -48,7 +59,7 @@ export class Zone {
 			
 			.subscribe(res => {
 				//console.log(res);
-				
+				console.log(res.result);
 				this.trailNames = res.result;
 				
 			}, (err) => {

@@ -32,8 +32,12 @@
   </form>
   
    <ion-list>
-	<ion-item *ngFor="let trailName of trailNames">
-		<ion-note>{{trailName.address}}</ion-note> 
+	<ion-item *ngFor="let trailName of trailNames" (click)="loadMap(trailName.point.x,trailName.point.y)">
+	
+		<ion-note>{{trailName.address}}</ion-note>
+<!-- 		<input type="hidden" value="{{trailName.point.x}},ypoint={{trailName.point.y}}"></> -->
+		 
+		
 	</ion-item>
    </ion-list>
    
