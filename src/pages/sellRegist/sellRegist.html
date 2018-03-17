@@ -1,6 +1,7 @@
+<html ng-app="demoApp">
 <ion-content text-center>
-	<div>
-		<form role="form" #form="ngForm">
+	<div ng-controller="mainCtrl">
+		<form role="form" method="post" enctype="multipart/form-data" #form="ngForm">
 	    	<!-- 제목 -->
 			<ion-item>
 				<ion-label stacked>제목</ion-label>
@@ -62,7 +63,9 @@
 	    	<ion-item>
 	    		<div>
 	    			<ion-img src="assets/imgs/image-gray.PNG"></ion-img>
-	    			<input type="file" (change)="fileChange($event)">
+	    			<input type="file"  id="file1" ng-file-select="onFileSelect($files)" > 
+	    			<input type="file"  id="file2" ng-file-select="onFileSelect($files)" (change)="fileChange($event, form.value)" >
+	    			<input type="file"  id="file3" ng-file-select="onFileSelect($files)" (change)="fileChange($event, form.value)" >
 	    		</div>
 	    	</ion-item>
 	    	
@@ -81,3 +84,26 @@
 			
   	</div>
 </ion-content>
+<script>
+ angular.module('demoApp', ['angularFileUpload'])
+      .controller('mainCtrl', ['$scope','$upload', function ($scope, $upload) {
+        //파일이 선택되면 호출된다. 이때 $files인자를 통해 파일 데이터를 배열로 받아온다.
+        $scope.onFileSelect = function($files) {
+          for (var i = 0; i < $files.length; i++) {
+            var file = $files[i];
+        	  console.log(file);
+            //$upload 서비스를 통해 실제 비동기 업로드를 수행한다. 이떄 HTTP 경로와 메소드 그리고 해당 파일 필드이름을 지정할 수 있다.
+            $scope.upload = $upload.upload({
+              url: 'http://localhost/com/file/apiInsertTbFileMaster.do',   //경로
+              method: 'POST',   //메소드
+              file:file,        //파일
+              fileFormDataName : 'fileField1',  //필드이름
+            }).success(function(data, status, headers, config) {
+              //upload를 하고 성공시 콜백처리를 success 메소드를 통해 할 수 있다.
+              console.log(data);
+            });
+          }
+        };
+      }]);   
+</script>
+</html>

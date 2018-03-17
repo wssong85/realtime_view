@@ -5,6 +5,8 @@ import { NavController, NavParams} from 'ionic-angular';
 import { SellPage } from '../sell/sell';
 import { AlertProvider } from '../../providers/alert/alert';
 
+//import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+//import { Camera, CameraOptions, CameraPopoverOptions} from '@ionic-native/camera';
 
 @Component({
 	selector: 'page-sellRegist',
@@ -15,7 +17,7 @@ export class SellRegistPage {
 
 	rootPage:any = SellPage;
 	
-	cash: any = {lower: 0, upper: 1000000};
+	cash    : any = {lower: 0, upper: 1000000};
 	title   : string = "아디다스 직거래 원합니다.";
 	tradeSe : string = "01";
 	saleSe  : string = "01";
@@ -24,6 +26,8 @@ export class SellRegistPage {
 	
 	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alert: AlertProvider) {
 	
+		//const fileTransfer: FileTransferObject = this.transfer.create();
+		//fileTransfer.abort();
 	}
 	
 	ionViewDidLoad() {
@@ -57,10 +61,27 @@ export class SellRegistPage {
   	init() {
   		//console.log("regist");
   	}
-  	
+
   	//파일변경 이벤트
-  	fileChange($event) {
-		console.log($event.target.files);
+  	fileChange(event, formValue) {
+  		
+		//console.log(event);
+		//console.log(event.target.files);
+		//console.log(formValue);
+		
+		// let options: FileUploadOptions = {
+	    // 	fileKey: 'file',
+	    //  	fileName: 'name.jpg',
+	    // 	headers: {}
+		// }
+		
+		// console.log(options);
+		
+		//fileTransfer.upload('<file path>', '<api endpoint>', options)
+		//.then((data) => {
+		//}, (err) => {
+		//})
+		
 		
 		//TODO 파일 확장자 검사
 	    //if ($event.target.files.length > 0) {
@@ -72,6 +93,9 @@ export class SellRegistPage {
 	    // 	reader.readAsDataURL($event.target.files[0]);
 	    //}
   	}
+  	
+  
+
   	
   	//해시태그변경 이벤트
   	hashtagChange(v) {
@@ -92,8 +116,6 @@ export class SellRegistPage {
   	sellRegist(formValue : any) {
   		const headers = new HttpHeaders();
         headers.append("Content-Type", "application/json; charset=UTF-8");
-        
-		console.log(formValue);
 		
 		this.http.post("http://localhost/shopping/product/insertSellProduct.do", formValue, { headers: headers })
 		.subscribe((res: any)  => {
