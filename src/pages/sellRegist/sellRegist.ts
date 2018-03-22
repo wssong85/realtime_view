@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NavController, NavParams} from 'ionic-angular';
-
-import { SellPage } from '../sell/sell';
-import { AlertProvider } from '../../providers/alert/alert';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-//import { Camera, CameraOptions, CameraPopoverOptions} from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
+
+import { SellPage } from '../sell/sell';
+import { AlertProvider } from '../../providers/alert/alert';
 
 @Component({
 	selector: 'page-sellRegist',
   	templateUrl: 'sellRegist.html'
 })
-
 export class SellRegistPage {
 
 	rootPage:any = SellPage;
@@ -25,19 +24,14 @@ export class SellRegistPage {
 	saleLoc : string = "신촌 현대백화점";
 	hashtag : String = "";
 	
-	
 	constructor(public navCtrl: NavController, public navParams: NavParams, 
-		public http: HttpClient, public alert: AlertProvider,
-		private file: File,
-		private transfer: FileTransfer) {
+		public http: HttpClient, public alert: AlertProvider, public platform: Platform,
+		private file: File, private transfer: FileTransfer, private camera: Camera) {
 	
 		//const fileTransfer1: FileTransferObject = this.transfer.create();
 		//fileTransfer.abort();
 	}
 
-	
-
-	
 	ionViewDidLoad() {
 		this.init();
 	}
@@ -71,39 +65,32 @@ export class SellRegistPage {
   	}
 
   	//파일변경 이벤트
-  	fileChange(event, formValue, id) {
+  	fileChange(event: any, formValue: object, id: string) {
 
-		const fileTransfer: FileTransferObject = this.transfer.create();
-		fileTransfer.abort();
+        const files = event.target.files;
+        const fileToUpload = files[0];
 
-		const headers = new HttpHeaders();
-		headers.append("Content-Type", "application/json; charset=UTF-8");
-		
+        const formData = new FormData();
+        formData.append("file", fileToUpload, fileToUpload.name);
+        formData.append("id", id);
 
-		//console.log(event);
-		console.log(event.target.files);
-		console.log(id);
-		console.log(formValue);
-		
-		let options: FileUploadOptions = {
-	    	fileKey: 'file'+id,
-	     	fileName: event.target.files[0].name,
-	    	headers: headers
-		}
+        // 차라리 서버에서 json parse하는게 나을듯?
+        // 안할경우 cash 처리 필요
+        for (const key in formValue) {
+            if (formValue.hasOwnProperty(key)) {
+                const value = formValue[key];
+                formData.append(key, value);
+            }
+        }
 
-		
-		console.log(1);
-		
-		fileTransfer.upload('http://localhost/com/file/apiInsertTbFileMaster.do', 'http://localhost/com/file/apiInsertTbFileMaster.do', options)
-		.then((data) => {
-			console.log(3);
-		}, (err) => {
-			console.log(4);
-		})
-		console.log(2);
-		
-		
-		//TODO 파일 확장자 검사
+        this.http.post("http://localhost/com/file/apiInsertTbFileMaster.do", formData)
+        .subscribe((res: any) => {
+            console.log(res);
+        }, (err) => {
+            console.log(err);
+        });
+
+        //TODO 파일 확장자 검사
 	    //if ($event.target.files.length > 0) {
 	    //	var reader = new FileReader();
 		//	var that = this;
@@ -112,11 +99,8 @@ export class SellRegistPage {
 		//	}
 	    // 	reader.readAsDataURL($event.target.files[0]);
 	    //}
-  	}
-  	
-  
+    }
 
-  	
   	//해시태그변경 이벤트
   	hashtagChange(v) {
   		
@@ -134,8 +118,8 @@ export class SellRegistPage {
   	
   	//상품등록
   	sellRegist(formValue : any) {
-  		const headers = new HttpHeaders();
-        headers.append("Content-Type", "application/json; charset=UTF-8");
+  		let headers = new HttpHeaders();
+        headers = headers.append("Content-Type", "application/json; charset=UTF-8");
 		
 		this.http.post("http://localhost/shopping/product/insertSellProduct.do", formValue, { headers: headers })
 		.subscribe((res: any)  => {

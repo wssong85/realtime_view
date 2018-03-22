@@ -63,9 +63,9 @@
 	    	<ion-item>
 	    		<div>
 	    			<ion-img src="assets/imgs/image-gray.PNG"></ion-img>
-	    			<input type="file"  id="file1" (change)="fileChange($event, form.value, 1)"> 
-	    			<input type="file"  id="file2" (change)="fileChange($event, form.value, 2)" >
-	    			<input type="file"  id="file3" (change)="fileChange($event, form.value, 3)" >
+	    			<input type="file" id="file1" accept="image/*" (change)="fileChange($event, form.value, 1)"> 
+	    			<input type="file" id="file2" (change)="fileChange($event, form.value, 2)" >
+	    			<input type="file" id="file3" (change)="fileChange($event, form.value, 3)" >
 	    		</div>
 	    	</ion-item>
 	    	
