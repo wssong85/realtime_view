@@ -24,8 +24,10 @@ export class BuyPage {
 
 	@ViewChild("map") mapElement: ElementRef;
 
-	static readonly LINE_SIZE: number = 2;
-	page: number = 0; // 일단은 limit으로 처리하기 때문에 0부터 시작
+    static readonly LINE_SIZE: number = 5;
+    static readonly RADIUS: number = 3;     // km 단위
+
+	page: number = 0;                       // 일단은 limit으로 처리하기 때문에 0부터 시작
 
 	hoverIdx: number = -1;
 
@@ -37,8 +39,16 @@ export class BuyPage {
 
 	map: any;
     markers: any[] = [];
-    bounds:any = new google.maps.LatLngBounds();
-	curPos: any;
+    bounds:any = null;
+    curPos: any;
+
+    circle: any = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+    });
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, 
 		public geolocation: Geolocation, public alert: AlertProvider, public loading: LoadingProvider) {
@@ -126,15 +136,22 @@ export class BuyPage {
 
 			this.initMap();
             this.page = 0;
-            
-            console.log("여기까지 옴");
 
 		} else {
 
 			this.addMarkers();
 			this.page += 1;
-		}
+        }
+        
+        if (Object.keys(this.zone).length === 0) {
 
+            this.circle.setMap(null);
+        } else {
+            this.circle.setMap(this.map);
+            this.circle.setCenter((new google.maps.LatLng(this.zone.y, this.zone.x)));
+            this.circle.setRadius(BuyPage.RADIUS * 1000); // 1000m = 1km
+        }
+    
 		this.loading.hide();
     }
 
@@ -142,8 +159,9 @@ export class BuyPage {
 
         let params = Object.assign({}, this.filter, this.zone);
 
-        params["page"] = this.page * BuyPage.LINE_SIZE;
-        params["lineSize"] = BuyPage.LINE_SIZE;
+        params.page = this.page * BuyPage.LINE_SIZE;
+        params.lineSize = BuyPage.LINE_SIZE;
+        params.radius = BuyPage.RADIUS;
         
         console.log(params);
 
@@ -217,6 +235,8 @@ export class BuyPage {
 	// 마커 추가
 	addMarkers() {
 
+        this.bounds = new google.maps.LatLngBounds();
+
 		this.products.forEach(obj => {
 
 			const coords = obj.SALE_COORDINATE.split(",");
@@ -235,8 +255,6 @@ export class BuyPage {
     }
     
     addMarker(x: any, y: any, title: string, content: string) {
-
-        const bounds = new google.maps.LatLngBounds();
 
         const marker = new google.maps.Marker({
             position: new google.maps.LatLng(y, x),
