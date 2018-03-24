@@ -1,6 +1,6 @@
 <ion-content padding text-center>
-    
-		<ion-input type="hidden" placeholder="productSeq" [(ngModel)]="productSeq" ></ion-input>
+	<form role="form" method="post" #form="ngForm">
+		<ion-input type="hidden" name="productSeq" placeholder="productSeq" [(ngModel)]="productSeq" ></ion-input>
     	<!-- 이미지 -->
     	<ion-item>
 	    	<ion-thumbnail>
@@ -13,7 +13,8 @@
     	<!-- hashtag -->
 		<ion-item>
 			<ion-label stacked>hashtag</ion-label>
-			<ion-input type="text" placeholder="hashtag" value="" [(ngModel)]="hashtagOrg" ></ion-input>
+			<ion-input type="text" name="hashtagOrg" placeholder="hashtag" value="" [(ngModel)]="hashtagOrg" (change)="hashtagChange($event.target.value)"></ion-input>
+			<ion-input type="hidden" id="hashtag" name="hashtag" [(ngModel)]="hashtag" value=""></ion-input>
 		</ion-item>
 		
 		<!-- 판매가격 -->
@@ -49,7 +50,7 @@
     	<!-- 제목 -->
 		<ion-item>
 			<ion-label stacked>제목</ion-label>
-			<ion-input type="text" [(ngModel)]="title"></ion-input>
+			<ion-input type="text" name="title" [(ngModel)]="title"></ion-input>
 		</ion-item>
 		    	
     	<!-- 판매위치 -->
@@ -58,7 +59,8 @@
 			<ion-input type="text" name="saleLoc" [(ngModel)]="saleLoc" value=""></ion-input>
 			<ion-icon ios="ios-locate" md="md-locate"></ion-icon>
 		</ion-item>
-        
-        <button ion-button (click)="goBack()">뒤로가기</button>
+	</form>
 		
+		<button ion-button (click)="sellList()">목록</button>
+        <button ion-button (click)="sellSave(form.value)">저장</button>
 </ion-content>

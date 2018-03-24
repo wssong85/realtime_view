@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { SellPage } from '../sell/sell';
+
 import { AlertProvider } from '../../providers/alert/alert';
 import { LoadingProvider } from '../../providers/loading/loading'
 
@@ -17,6 +19,7 @@ export class SellDetailPage {
 	saleSe     : string = "";
 	saleLoc    : string = ""; 
 	title      : string = "";
+	hashtag    : string = "";
 	hashtagOrg : string = "";
 	productSeq : String = "";
 	
@@ -78,7 +81,7 @@ export class SellDetailPage {
 			
 			//데이터셋팅
 			if(res.success) {
-				console.log(product);
+				//console.log(product);
 				if (product) {
 					this.productSeq = product.PRODUCT_SEQ;
 					this.hashtagOrg = product.HASHTAG;
@@ -100,8 +103,46 @@ export class SellDetailPage {
 			  this.alert.showWithMessage("failed loading json data");
 		  });
     }
-      
-    goBack() {
-        this.navCtrl.pop();
-    }
+
+  	//해시태그변경 이벤트
+  	hashtagChange(v) {
+		  
+		console.log(v);
+		console.log(v.split("#").join());
+		
+		this.hashtag = v.split("#").join();
+	}
+
+  	//상품목록 이동
+  	sellList() {
+  	
+		this.navCtrl.push(SellPage);
+	}
+	
+	//상품수정
+	sellSave(formValue : any) {
+
+		console.log(formValue);
+		const headers = new HttpHeaders();
+		headers.append("Content-Type", "application/json; charset=UTF-8");
+		
+		this.http.post("http://localhost/shopping/product/updateSellProduct.do", formValue, { headers: headers })
+		.subscribe((res: any)  => {
+			
+			if(res.success) {
+				this.alert.showWithMessage("판매정보를 수정했습니다.");
+				//this.navCtrl.push(SellPage);
+				this.sellList();
+			
+			} else {
+				this.alert.showWithMessage(res.message);
+			}
+			
+		}, (err) => {
+			this.alert.showWithMessage("failed loading json data");
+		});
+
+
+		
+	}
 }
