@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Tabs, Tab } from 'ionic-angular';
 
+import { BuyProvider } from '../../providers/buy/buy';
+
 import { MapPage } from '../map/map';
 import { BuyPage } from '../buy/buy';
 import { SellPage } from '../sell/sell';
-
-import { Zone } from '../zone/zone';
 import { FilterPage } from '../filter/filter';
+import { Zone } from '../zone/zone';
 
 @IonicPage()
 @Component({
@@ -21,37 +22,37 @@ export class IndexPage {
 	tab3Root = SellPage;
 
 	currentIdx: number = 0;
-	filters: object = {};
-    products: any[] = [];
-    points: object = {};
 
 	tabRootParams:object = {};
 	
-	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public buy: BuyProvider) {
 
 		// navParams 처리
 		const tabIdx = this.navParams.get("tabIdx");
-		const filters = this.navParams.get("filters");
+		const filter = this.navParams.get("filter");
+        const zone = this.navParams.get("zone");
         const products = this.navParams.get("products");
-        const points = this.navParams.get("points");
 
-        console.log(this.navParams);
-		
 		// tabIdx 값이 숫자이고 0 이상 
 		if (!isNaN(tabIdx) && tabIdx >= 0) {
 			// 화면에 보여질 탭 설정
 			this.currentIdx = tabIdx;
 		}
-		
-		this.filters = filters || {};		// 필터를 통해서 왔는지 여부
-        this.products = products || []; 	// 필터 검색 결과
-        this.points = points || {};         // 장소 검색 결과
+        
+        // 필터 검색 조건 설정
+        if (filter && Object.keys(filter).length !== 0) {
+            buy.filter = filter;
+        }
+
+         // 장소 검색 조건
+        if (zone && Object.keys(zone).length !== 0) {
+            buy.zone = zone;
+        }
 
 		// 탭으로 보낼 데이터 설정
 		this.tabRootParams = {
-			filters: this.filters,
-            products: this.products,
-            points: this.points
+			filter: buy.filter,
+            zone: buy.zone
 		}
 	}
 

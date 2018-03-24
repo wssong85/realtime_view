@@ -30,15 +30,8 @@ export class Zone {
   	trailNames: any;
   	placeNames: any;
   	
-  	//result: any;
-  	
-  	
   	loadMap(x, y) {
-  		//console.log(x);
-  		//console.log(y);
-
-  		this.navCtrl.setRoot(IndexPage, { tabIdx: 1, points : {"x":x, "y":y} });
-  	
+  		this.navCtrl.setRoot(IndexPage, { tabIdx: 1, zone : {"x":x, "y":y} });
   	}
 
 	loadPlace(formValue: any) {

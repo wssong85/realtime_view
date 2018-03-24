@@ -30,6 +30,7 @@ import { FilterPageModule } from '../pages/filter/filter.module';
 
 import { AlertProvider } from '../providers/alert/alert';
 import { LoadingProvider } from '../providers/loading/loading';
+import { BuyProvider } from '../providers/buy/buy';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { LoadingProvider } from '../providers/loading/loading';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertProvider,
     LoadingProvider,
+    BuyProvider,
     File,
     FileTransfer,
     FileTransferObject,

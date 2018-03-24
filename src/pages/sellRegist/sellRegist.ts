@@ -7,7 +7,7 @@ import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 
 import { SellPage } from '../sell/sell';
-import { MapSearchPage } from '../map-search/map-search'
+import { MapSearchPage } from '../map-search/map-search';
 
 import { AlertProvider } from '../../providers/alert/alert';
 

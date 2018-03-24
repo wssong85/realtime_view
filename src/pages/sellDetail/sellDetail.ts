@@ -5,7 +5,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SellPage } from '../sell/sell';
 
 import { AlertProvider } from '../../providers/alert/alert';
-import { LoadingProvider } from '../../providers/loading/loading'
+import { LoadingProvider } from '../../providers/loading/loading';
 
 @IonicPage()
 @Component({

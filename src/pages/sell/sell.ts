@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { AlertProvider } from '../../providers/alert/alert'
-import { LoadingProvider } from '../../providers/loading/loading'
+import { AlertProvider } from '../../providers/alert/alert';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 import { SellDetailPage } from '../sellDetail/sellDetail';
 import { SellRegistPage } from '../sellRegist/sellRegist';

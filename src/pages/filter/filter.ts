@@ -56,7 +56,11 @@ export class FilterPage {
 		}, (err) => {
 			this.alert.showWithMessage("failed loading json data");
 		});
-	}
+    }
+    
+    loadMap(formValue: any) {
+        this.navCtrl.setRoot(IndexPage, { tabIdx: 1, filter: formValue}); 
+    }
 
 	getNow(addMonth: number = 0) {
 

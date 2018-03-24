@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IonicPage, ViewController, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
-import { AlertProvider } from '../../providers/alert/alert'
-import { LoadingProvider } from '../../providers/loading/loading'
+import { AlertProvider } from '../../providers/alert/alert';
+import { LoadingProvider } from '../../providers/loading/loading';
 
 /**
  * Generated class for the MapSearchPage page.
