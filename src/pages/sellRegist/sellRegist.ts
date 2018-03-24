@@ -72,9 +72,12 @@ export class SellRegistPage {
         const files = event.target.files;
         const fileToUpload = files[0];
 
+		let fileArr = fileToUpload.name.split(".");
+
         const formData = new FormData();
-        formData.append("file", fileToUpload, fileToUpload.name);
-        formData.append("id", id);
+        formData.append("file", fileToUpload, fileArr[0] + "_" + id + "." + fileArr[1]);  //파일아이디 셋팅
+		formData.append("id", id);
+		formData.append("PROCESS_SE", "C");  //파일컨트롤러 처리구분값 - C(새로입력), U(입력된 후 다시 입력)
 
         // 차라리 서버에서 json parse하는게 나을듯?
         // 안할경우 cash 처리 필요
@@ -83,14 +86,14 @@ export class SellRegistPage {
                 const value = formValue[key];
                 formData.append(key, value);
             }
-        }
+		}
 
         this.http.post("http://localhost/com/file/apiInsertTbFileMaster.do", formData)
         .subscribe((res: any) => {
             console.log(res);
         }, (err) => {
             console.log(err);
-        });
+		});
 
         //TODO 파일 확장자 검사
 	    //if ($event.target.files.length > 0) {
