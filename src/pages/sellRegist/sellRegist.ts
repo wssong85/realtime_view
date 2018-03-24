@@ -1,12 +1,14 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { ModalController, NavController, NavParams, Platform } from 'ionic-angular';
 
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 
 import { SellPage } from '../sell/sell';
+import { MapSearchPage } from '../map-search/map-search'
+
 import { AlertProvider } from '../../providers/alert/alert';
 
 @Component({
@@ -24,7 +26,7 @@ export class SellRegistPage {
 	saleLoc : string = "신촌 현대백화점";
 	hashtag : String = "";
 	
-	constructor(public navCtrl: NavController, public navParams: NavParams, 
+	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
 		public http: HttpClient, public alert: AlertProvider, public platform: Platform,
 		private file: File, private transfer: FileTransfer, private camera: Camera) {
 	
@@ -141,5 +143,17 @@ export class SellRegistPage {
 		}, (err) => {
 			this.alert.showWithMessage("failed loading json data");
 		});
-  	}
+      }
+      
+    searchGo() {
+
+        let modal = this.modalCtrl.create(MapSearchPage);
+
+        modal.onDidDismiss(data => {
+            console.log("sellRegist.ts data = %o", data);
+            this.saleLoc = data.location;
+        });
+
+        modal.present();
+    }
 }
