@@ -22,7 +22,9 @@ export class SellDetailPage {
 	hashtag    : string = "";
 	hashtagOrg : string = "";
 	productSeq : String = "";
-	
+	imgSrc1    : String = "";
+	imgSrc2    : String = "";
+	imgSrc3    : String = "";
 	
 	paramProduct : object = {};
 
@@ -77,8 +79,9 @@ export class SellDetailPage {
 		this.http.post("http://localhost/shopping/product/selectSellProduct.do", this.paramProduct, { headers: headers })
 		.subscribe((res: any) => {
   
-			const product = res.data;
-			
+			const product = res.data.product;
+			const file = res.data.file;
+
 			//데이터셋팅
 			if(res.success) {
 				//console.log(product);
@@ -92,6 +95,21 @@ export class SellDetailPage {
 					this.cash       = {lower: product.MIN_COST, upper: product.MAX_COST};
 					//this.cash.lower = product.MIN_COST;
 					//this.cash.upper = product.MAX_COST;
+				}
+				if (file) {
+					for (let i in file) {
+						let item = file[i];
+						let imgSrc = "http://localhost/com/file/apiSelectTbFileDetail.do?FILE_ID=" + item.FILE_ID
+								   + "&FILE_DETAIL_ID=" + item.FILE_DETAIL_ID
+								   + "&FILE_SEQ=" + item.FILE_SEQ;
+						if (item.FILE_SEQ==1) {
+							this.imgSrc1 = imgSrc;
+						} else if (item.FILE_SEQ==2) {
+							this.imgSrc2 = imgSrc;
+						} else if (item.FILE_SEQ==3) {
+							this.imgSrc3 = imgSrc;
+						}
+					}
 				}
 			}
 
@@ -107,9 +125,6 @@ export class SellDetailPage {
   	//해시태그변경 이벤트
   	hashtagChange(v) {
 		  
-		console.log(v);
-		console.log(v.split("#").join());
-		
 		this.hashtag = v.split("#").join();
 	}
 
