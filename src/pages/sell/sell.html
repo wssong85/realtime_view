@@ -4,7 +4,9 @@
     <ng-template #fullList>
         <ion-item class="hand" *ngFor="let product of products; let idx = index" [ngClass]="{'btn-hover': idx === hoverIdx}" 
         (click)="detailGo(product.PRODUCT_SEQ)" (mouseenter)="itemEnter(idx)" (mouseleave)="itemLeave()">
-            <ion-avatar item-start></ion-avatar>
+            <ion-avatar item-start>
+                <img src="http://localhost/com/file/apiSelectTbFileDetail.do?FILE_ID={{product.FILE_ID}}&FILE_DETAIL_ID={{product.FILE_DETAIL_ID}}&FILE_SEQ={{product.FILE_SEQ}}">
+            </ion-avatar>
             <h2>{{product.TITLE}} 
 <!--                 <ion-badge *ngFor="let hashtag of product.HASHTAG | hashtagToArray" item-end>{{hashtag}}</ion-badge>  -->
             </h2>

@@ -6,7 +6,7 @@
 			<ion-item>
 				<ion-label stacked>제목</ion-label>
 				<ion-input type="text" name="title" placeholder="제목을 입력해주세요." [(ngModel)]="title"></ion-input>
-			</ion-item>	
+			</ion-item>
 			
 	    	<!-- hashtag -->
 			<ion-item>
@@ -58,23 +58,53 @@
 	    			<ion-option value="02">판매완료</ion-option>
 	  	  		</ion-select>
 			</ion-item>
-	    	
+			
+			<!-- 대표사진 
+				<ion-list radio-group>
+					<ion-label stacked>대표사진</ion-label>
+					<ion-item>
+						<ion-radio checked="true" value="go">
+						<ion-img id="img2" src="assets/imgs/image-gray.PNG"></ion-img>
+						</ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-radio checked="true" value="go">
+						<ion-img id="img2" src="assets/imgs/image-gray.PNG"></ion-img>
+						</ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-radio checked="true" value="go">
+						<ion-img id="img2" src="assets/imgs/image-gray.PNG"></ion-img>
+						</ion-radio>
+					</ion-item>
+				</ion-list>
+			-->
 	    	<!-- 이미지 -->
 	    	<ion-item>
 	    		<div>
-	    			<ion-img src="assets/imgs/image-gray.PNG"></ion-img>
-	    			<input type="file" id="file1" accept="image/*" (change)="fileChange($event, form.value, 1)"> 
-	    			<input type="file" id="file2" (change)="fileChange($event, form.value, 2)" >
-	    			<input type="file" id="file3" (change)="fileChange($event, form.value, 3)" >
+					<input type="radio" name="chk" id="chk1" [checked]="chk1" (change)="radioChange($event, 1)">
+					<ion-img id="img1" src="C:\\realtime\\upload\\2018\\03\\24\\5_3"></ion-img>
+					<input type="file" id="file1" accept="image/*" (change)="fileChange($event, 1)">
+					
+					<input type="radio" name="chk" id="chk2" [checked]="chk2" (change)="radioChange($event, 2)">
+					<ion-img id="img2" src="assets/imgs/image-gray.PNG"></ion-img>
+					<input type="file" id="file2" accept="image/*" (change)="fileChange($event, 2)">
+					
+					<input type="radio" name="chk" id="chk3" [checked]="chk3" (change)="radioChange($event, 3)">
+					<ion-img id="img3" src="assets/imgs/image-gray.PNG"></ion-img>
+					<input type="file" id="file3" accept="image/*" (change)="fileChange($event, 3)">
 	    		</div>
 	    	</ion-item>
-	    	
+				
             <!-- 판매위치 -->
             <ion-item>
                 <button ion-button (click)="searchGo()" >판매위치 검색</button>
 			</ion-item>
 			<ion-item>
-                <ion-input type="text" name="saleLoc" [(ngModel)]="saleLoc" (click)="searchGo"></ion-input>
+				<!--위치-->
+				<ion-input type="text" name="saleLoc" [(ngModel)]="saleLoc" (click)="searchGo"></ion-input>
+				<!--좌표-->
+				<ion-input type="hidden" id="saleCordinate" name="saleCordinate" [(ngModel)]="saleCordinate"></ion-input>
 			</ion-item>
 	 	</form>
 	 	
@@ -84,7 +114,7 @@
 			
   	</div>
 </ion-content>
-<script>
+<!-- <script>
  angular.module('demoApp', ['angularFileUpload'])
       .controller('mainCtrl', ['$scope','$upload', function ($scope, $upload) {
         //파일이 선택되면 호출된다. 이때 $files인자를 통해 파일 데이터를 배열로 받아온다.
@@ -105,5 +135,5 @@
           }
         };
       }]);   
-</script>
+</script> -->
 </html>
