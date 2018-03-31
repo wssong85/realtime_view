@@ -16,14 +16,19 @@
             <br/>
             <ion-note>시작 : {{product.SALE_START_DATE}} / 종료 : {{product.SALE_END_DATE}}</ion-note> 
         </ion-item>
-        <button ion-button round margin-top (click)="initList(true)">더보기</button>
-        <ion-icon name="add-circle" (click)="registGo()"></ion-icon>
     </ng-template>
-
+    
     <ng-template #emptyList>
         <ion-item>
             {{emptyMessage}}
         </ion-item>
-        <ion-icon name="add-circle" (click)="registGo()"></ion-icon>
     </ng-template>
+    
+    <ion-fab bottom left >
+        <ion-icon name="apps" (click)="initList(true)"></ion-icon>
+    </ion-fab>
+    <ion-fab bottom right >
+        <ion-icon name="add-circle" (click)="registGo()"></ion-icon>
+    </ion-fab>
+
 </ion-content>
