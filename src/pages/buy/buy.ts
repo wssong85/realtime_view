@@ -3,10 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
-import { AlertProvider } from '../../providers/alert/alert'
-import { LoadingProvider } from '../../providers/loading/loading'
+import { AlertProvider } from '../../providers/alert/alert';
+import { LoadingProvider } from '../../providers/loading/loading';
 
-import { BuyDetailPage } from '../buy-detail/buy-detail'
+import { BuyDetailPage } from '../buy-detail/buy-detail';
 
 declare var google;
 
@@ -30,23 +30,25 @@ export class BuyPage {
 	hoverIdx: number = -1;
 
 	products: any[]  = [];
-	emptyMessage: string = "";
-    filters: object = {}; 
-    points: any = {};
+    emptyMessage: string = "";
+    
+    filter: object = {}; 
+    zone: any = {};
 
 	map: any;
-	markers: any[] = [];
+    markers: any[] = [];
+    bounds:any = new google.maps.LatLngBounds();
 	curPos: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, 
 		public geolocation: Geolocation, public alert: AlertProvider, public loading: LoadingProvider) {
 
 		// rootParams 데이터 처리
-		const params = this.navParams.data;
+        const params = this.navParams.data;
+
 		if (params) {
-			this.filters = params.filters;
-            this.products = params.products;
-            this.points = params.points;
+            this.filter = params.filter
+            this.zone = params.zone;
         }
 	}
 	
@@ -64,7 +66,7 @@ export class BuyPage {
 		console.log("buy.ts ionViewDidEnter...");
 
 		// 장소나 필터를 통해서 온 경우가 아니라면
-		if (Object.keys(this.points).length !== 0 || Object.keys(this.filters).length !== 0) {
+		if (Object.keys(this.filter).length !== 0 || Object.keys(this.zone).length !== 0) {
 			// 지도 reisze 처리
 			this.resetMap(this.map);
 		}
@@ -101,77 +103,16 @@ export class BuyPage {
 	
 	// 초기 목록 가져오기
 	initList() {
-
-		this.loading.show("잠시 기둘...");
-
-		if (Object.keys(this.points).length === 0 && (Object.keys(this.filters).length === 0 && this.products.length === 0)) {
-
-			let headers = new HttpHeaders();
-			headers = headers.append("Content-Type", "application/json; charset=UTF-8");
-
-			this.http.post("http://localhost/shopping/hastag/apiSelectBuyProduct.do", {}, { headers: headers })
-			.subscribe((res: any) => {
-
-				console.log("buy.ts initList results => %o", res);
-
-				this.products = res.products || [];
-				this.processList();
-
-			}, (err) => {
-
-				this.loading.hide();
-				this.alert.showWithMessage("failed loading json data");
-			});
+		if (Object.keys(this.filter).length === 0 && (Object.keys(this.zone).length === 0 && this.products.length === 0)) {
+            this.searchList(0);
 		} else {
-
-            if (Object.keys(this.points).length === 0) {
-                this.processList();
-            } else {
-                this.searchRadius();
-            }
+            this.searchList(1);
 		}
 	}
 
 	// 더보기 
 	moreList() {
-
-		let headers = new HttpHeaders();
-		headers = headers.append("Content-Type", "application/json; charset=UTF-8");
-
-		this.filters["page"] = this.page * BuyPage.LINE_SIZE;
-		this.filters["lineSize"] = BuyPage.LINE_SIZE
-
-		// 로딩 화면을 보여줌
-		this.loading.show("잠시 기둘...");
-
-		this.http.post("http://localhost/shopping/hastag/apiSelectBuyProduct.do", this.filters, { headers: headers })
-		.subscribe((res: any) => {
-
-            console.log("buy.ts moreList results => %o", res);
-            
-            if(res.success) {
-			
-				if (res.products.length === 0) {
-                    this.alert.showWithMessage("더이상 없엉..");
-    
-                } else {
-                    // 기존 목록과 합침
-                    this.products = this.products.concat(res.products);
-                }
-    
-                this.processList();
-			
-			} else {
-                
-                this.loading.hide();
-				this.alert.showWithMessage(res.message);
-			}
-
-		}, (err) => {
-
-			this.loading.hide();
-			this.alert.showWithMessage("failed loading json data");
-		});
+        this.searchList(2);
 	}
 
 	// 리스트 처리
@@ -184,7 +125,9 @@ export class BuyPage {
 			this.emptyMessage = "검색된 구매목록이 없습니다.";	
 
 			this.initMap();
-			this.page = 0;
+            this.page = 0;
+            
+            console.log("여기까지 옴");
 
 		} else {
 
@@ -194,10 +137,60 @@ export class BuyPage {
 
 		this.loading.hide();
     }
+
+    searchList(type: number) {
+
+        let params = Object.assign({}, this.filter, this.zone);
+
+        params["page"] = this.page * BuyPage.LINE_SIZE;
+        params["lineSize"] = BuyPage.LINE_SIZE;
+        
+        console.log(params);
+
+        let headers = new HttpHeaders();
+        headers = headers.append("Content-Type", "application/json; charset=UTF-8");
+        
+        // 로딩 화면을 보여줌
+		this.loading.show("잠시 기둘...");
+		
+		this.http.post("http://localhost/shopping/hastag/apiSelectBuyProduct.do", params, { headers: headers })
+		.subscribe((res: any) => {
+			
+			console.log("buy.ts moreList results => %o", res);
+            
+            if(res.success) {
+
+                if (type === 1 || type === 2) {
+
+                    if (type === 2 && res.products.length === 0) {
+                        this.alert.showWithMessage("더이상 없엉..");
+        
+                    } else {
+                        // 기존 목록과 합침
+                        this.products = this.products.concat(res.products);
+                    }
+
+                } else {
+                    this.products = res.products || [];
+                }
+
+                this.processList();
+			
+			} else {
+                
+                this.loading.hide();
+				this.alert.showWithMessage(res.message);
+			}
+		}, (err) => {
+
+			this.loading.hide();
+			this.alert.showWithMessage("failed loading json data");
+		});
+    }
     
     searchRadius() {
     
-        this.addMarker(this.points.x, this.points.y, "", "");
+        this.addMarker(this.zone.x, this.zone.y, "", "");
 
         // 일단은 검색 목록이 없는걸로...
         this.products.length = 0;
@@ -234,6 +227,9 @@ export class BuyPage {
 			}
         });
 
+        //  bounds 값에 따라 자동 레벨 조정
+		this.map.fitBounds(this.bounds);
+
         console.log("addMarkers => ", this.markers);
         console.log("addMarkers length => ", this.markers.length);
     }
@@ -260,10 +256,7 @@ export class BuyPage {
         }
         
         this.markers.push(marker);
-        bounds.extend(marker.getPosition());
-
-        //  bounds 값에 따라 자동 레벨 조정
-		this.map.fitBounds(bounds);
+        this.bounds.extend(marker.getPosition());
     }
 
 	// 모든 마커 지우기
