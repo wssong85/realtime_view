@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
 /*
   Generated class for the BuyProvider provider.
@@ -13,8 +12,5 @@ export class BuyProvider {
     filter: object = {};
     zone: object = {};
 
-    constructor(public http: Http) {
-        console.log('Hello BuyProvider Provider');
-        console.log("call?");
-    }
+    constructor() {}
 }

@@ -31,6 +31,7 @@ import { FilterPageModule } from '../pages/filter/filter.module';
 import { AlertProvider } from '../providers/alert/alert';
 import { LoadingProvider } from '../providers/loading/loading';
 import { BuyProvider } from '../providers/buy/buy';
+import { GUserProvider } from '../providers/g-user/g-user';
 
 @NgModule({
   declarations: [
@@ -67,13 +68,15 @@ import { BuyProvider } from '../providers/buy/buy';
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GUserProvider,
     AlertProvider,
     LoadingProvider,
     BuyProvider,
     File,
     FileTransfer,
     FileTransferObject,
-    Camera
+    Camera,
+    GUserProvider
   ]
 })
 export class AppModule {}
