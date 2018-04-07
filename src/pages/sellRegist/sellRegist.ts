@@ -5,6 +5,7 @@ import { ModalController, NavController, NavParams, Platform, Checkbox, RadioBut
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
+import { UserAgent } from '@ionic-native/user-agent';
 
 import { SellPage } from '../sell/sell';
 import { MapSearchPage } from '../map-search/map-search';
@@ -39,8 +40,17 @@ export class SellRegistPage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
 		public http: HttpClient, public alert: AlertProvider, public platform: Platform,
-		private file: File, private transfer: FileTransfer, private camera: Camera) {
+		private file: File, private transfer: FileTransfer, private camera: Camera,
+		private userAgent: UserAgent) {
 	
+
+			this.userAgent.get()
+				.then((res: any) => console.log(res))
+				.catch((error: any) => console.error(error));
+
+
+
+
 		//const fileTransfer1: FileTransferObject = this.transfer.create();
 		//fileTransfer.abort();
 	}
@@ -177,7 +187,7 @@ export class SellRegistPage {
 		formValue.fileId         = this.fileId;          //파일마스터아이디
 		formValue.delegateFileId = this.delegateFileId;  //파일대표아이디
 		
-		this.http.post("http://localhost/shopping/product/insertSellProduct.do", formValue, { headers: headers })
+		this.http.post("http://localhost/shopping/product/apiInsertSellProduct.do", formValue, { headers: headers })
 		.subscribe((res: any)  => {
 			
 			if(res.success) {

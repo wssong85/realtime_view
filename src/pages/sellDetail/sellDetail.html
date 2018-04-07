@@ -4,7 +4,7 @@
     	<!-- 이미지 -->
     	<ion-item>
 	    	<ion-thumbnail>
-		    	<ion-img [src]="imgSrc1"></ion-img>
+		    	<ion-img [src]="imgSrc1" (click)="imageZoom"></ion-img>
 		    	<ion-img [src]="imgSrc2"></ion-img>
 		    	<ion-img [src]="imgSrc3"></ion-img>
 			</ion-thumbnail>
@@ -16,7 +16,6 @@
 			<ion-input type="text" name="title" [(ngModel)]="title"></ion-input>
 		</ion-item>
 				
-    	
     	<!-- hashtag -->
 		<ion-item>
 			<ion-label stacked>hashtag</ion-label>
@@ -47,7 +46,24 @@
     			<ion-option value="02">택배</ion-option>
   	  		</ion-select>
 		</ion-item>
-		    	
+				
+		<!-- 이미지 -->
+		<ion-item>
+			<div>
+				<input type="radio" name="chk" id="chk1" [checked]="chk1" (change)="radioChange($event, 1)">
+				<ion-img id="img1" src="C:\\realtime\\upload\\2018\\03\\24\\5_3"></ion-img>
+				<input type="file" id="file1" accept="image/*" (change)="fileChange($event, 1)">
+				
+				<input type="radio" name="chk" id="chk2" [checked]="chk2" (change)="radioChange($event, 2)">
+				<ion-img id="img2" src="assets/imgs/image-gray.PNG"></ion-img>
+				<input type="file" id="file2" accept="image/*" (change)="fileChange($event, 2)">
+				
+				<input type="radio" name="chk" id="chk3" [checked]="chk3" (change)="radioChange($event, 3)">
+				<ion-img id="img3" src="assets/imgs/image-gray.PNG"></ion-img>
+				<input type="file" id="file3" accept="image/*" (change)="fileChange($event, 3)">
+			</div>
+		</ion-item>
+			
     	<!-- 판매위치 -->
 		<ion-item>
 			<ion-label stacked>판매위치</ion-label>

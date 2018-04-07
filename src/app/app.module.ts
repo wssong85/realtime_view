@@ -32,6 +32,7 @@ import { AlertProvider } from '../providers/alert/alert';
 import { LoadingProvider } from '../providers/loading/loading';
 import { BuyProvider } from '../providers/buy/buy';
 import { GUserProvider } from '../providers/g-user/g-user';
+import { gAjaxProvider } from '../providers/comm/gAjaxProvider';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { GUserProvider } from '../providers/g-user/g-user';
     FileTransfer,
     FileTransferObject,
     Camera,
-    GUserProvider
+    GUserProvider,
+    gAjaxProvider
   ]
 })
 export class AppModule {}

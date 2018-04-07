@@ -27,6 +27,7 @@
     "@ionic-native/geolocation": "^4.5.2",
     "@ionic-native/splash-screen": "4.3.0",
     "@ionic-native/status-bar": "4.3.0",
+    "@ionic-native/user-agent": "^4.6.0",
     "@ionic/storage": "2.0.1",
     "cordova-plugin-camera": "^4.0.2",
     "cordova-plugin-file": "^6.0.1",

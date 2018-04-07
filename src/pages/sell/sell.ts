@@ -8,6 +8,8 @@ import { LoadingProvider } from '../../providers/loading/loading';
 import { SellDetailPage } from '../sellDetail/sellDetail';
 import { SellRegistPage } from '../sellRegist/sellRegist';
 
+import { gAjaxProvider } from '../../providers/comm/gAjaxProvider';
+
 @Component({
 	selector: 'page-sell',
   	templateUrl: 'sell.html'
@@ -23,7 +25,7 @@ export class SellPage {
 	products: any[]  = [];
 	emptyMessage: string = "";
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alert: AlertProvider, public loading: LoadingProvider) {}
+    constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alert: AlertProvider, public loading: LoadingProvider, public gAjax: gAjaxProvider) {}
     
     //페이지들어올때마다
     ionViewWillEnter() {
@@ -52,34 +54,46 @@ export class SellPage {
         this.param["page"] = this.page * SellPage.LINE_SIZE;
         this.param["lineSize"] = SellPage.LINE_SIZE;
 
-        this.http.post("http://localhost/shopping/product/selectSellProductList.do", this.param, { headers: headers })
-        .subscribe((res: any) => {
+        		//공통ajax 변수셋팅
+		var param = { "url" : "http://localhost/shopping/product/apiSelectSellProductList.do"
+					, "param" : this.param
+					, "ajaxType" : 1
+		};
 
-            console.log("sell.ts initList results => %o", res);
+		const result = this.gAjax.gFnAjax(param);
 
-            if (res.data.length === 0) {
+        console.log(result);
+        
+        this.loading.hide();
 
-                if (isMore) {
-                    this.alert.showWithMessage("더이상 없엉..");
+        // this.http.post("http://localhost/shopping/product/apiSelectSellProductList.do", this.param, { headers: headers })
+        // .subscribe((res: any) => {
 
-                } else {
-                    this.emptyMessage = "검색된 판매목록이 없습니다.";	
-                    this.page = 0;
-                }
-			} else {
+        //     console.log("sell.ts initList results => %o", res);
 
-				// 기존 목록과 합침
-                this.products = this.products.concat(res.data);
-                this.page += 1;
-            }
+        //     if (res.data.length === 0) {
+
+        //         if (isMore) {
+        //             this.alert.showWithMessage("더이상 없엉..");
+
+        //         } else {
+        //             this.emptyMessage = "검색된 판매목록이 없습니다.";	
+        //             this.page = 0;
+        //         }
+		// 	} else {
+
+		// 		// 기존 목록과 합침
+        //         this.products = this.products.concat(res.data);
+        //         this.page += 1;
+        //     }
             
-            this.loading.hide();
+        //     this.loading.hide();
 
-        }, (err) => {
+        // }, (err) => {
 
-            this.loading.hide();
-            this.alert.showWithMessage("failed loading json data");
-        });
+        //     this.loading.hide();
+        //     this.alert.showWithMessage("failed loading json data");
+        // });
     }
 	
     // 판매등록
