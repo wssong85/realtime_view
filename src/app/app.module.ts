@@ -31,7 +31,6 @@ import { FilterPageModule } from '../pages/filter/filter.module';
 import { AlertProvider } from '../providers/alert/alert';
 import { LoadingProvider } from '../providers/loading/loading';
 import { BuyProvider } from '../providers/buy/buy';
-import { UserProvider } from '../providers/user/user';
 import { GUserProvider } from '../providers/g-user/g-user';
 
 @NgModule({
@@ -69,7 +68,7 @@ import { GUserProvider } from '../providers/g-user/g-user';
     SplashScreen,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProvider,
+    GUserProvider,
     AlertProvider,
     LoadingProvider,
     BuyProvider,
