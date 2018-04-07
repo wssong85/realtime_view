@@ -169,8 +169,6 @@ export class SellRegistPage {
   	//상품등록
   	sellRegist(formValue : any) {
 
-		console.log(formValue);
-		return;
   		let headers = new HttpHeaders();
 		headers = headers.append("Content-Type", "application/json; charset=UTF-8");
 		  
