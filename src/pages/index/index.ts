@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Tabs, Tab } from 'ionic-angular';
 
 import { BuyProvider } from '../../providers/buy/buy';
+import { GUserProvider } from '../../providers/g-user/g-user';
 
 import { MapPage } from '../map/map';
 import { BuyPage } from '../buy/buy';
@@ -25,7 +26,7 @@ export class IndexPage {
 
 	tabRootParams:object = {};
 	
-	constructor(public navCtrl: NavController, public navParams: NavParams, public buy: BuyProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public gUser: GUserProvider, public buy: BuyProvider) {
 
 		// navParams 처리
 		const tabIdx = this.navParams.get("tabIdx");
@@ -53,7 +54,10 @@ export class IndexPage {
 		this.tabRootParams = {
 			filter: buy.filter,
             zone: buy.zone
-		}
+        }
+        
+        gUser.print();
+        console.log(gUser.get("USER_ID"));
 	}
 
 	ionViewDidLoad() { 

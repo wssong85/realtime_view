@@ -5,48 +5,37 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { Http, Headers } from '@angular/http';
+
+import { AlertProvider } from '../../providers/alert/alert';
+import { GUserProvider } from '../../providers/g-user/g-user';
+
 import { IndexPage } from '../index/index';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/timeout';
-
-
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class Login {
-	constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: Http) {
+    
+    constructor(public navCtrl: NavController, public alert: AlertProvider, public gUser: GUserProvider, public http: Http) {
 
   	}
-  	
-  	//users: any;
-  	result: any;
-  	//userName: any;
-  	//password: any;
-	//public userName: string;
-	
-	user = {
-	
-	}
-
+      
+    username: string = "";
+    password: string = "";
+      
+    result: any;
+      
 	btnLogin(v, v2) {
-	
-//	console.log('1');
-	//console.log(v);
-	//console.log(v2);
-//	console.log(this.user.username);
-//	console.log(this.user.password);
-
 		if(v == "1") {
-			console.log(v2);
 			this.loadjson2(v2);
 		}
-		
 	}
 	 	
 	loadjson2(formValue: any) {
@@ -54,8 +43,7 @@ export class Login {
 		var headers = new Headers();
         headers.append("Content-Type", "application/json; charset=UTF-8");
         
-  		console.log("formValue =>");
-  		console.log(formValue);      
+  		console.log("formValue =>", formValue);
 		
 		this.http.post('http://localhost/shopping/user/apiSelectTbUserCountForCheck.do', formValue, { headers: headers })
 		
@@ -65,32 +53,26 @@ export class Login {
 		
 			if(res.success) {
 			
-				console.log("==>" + res.result);
-				console.log(res.result);
-			
+                console.log("==>", res);
+                			
 				if(res.result) {
+
+                    // 사용자 정보 저장
+                    this.gUser.set(res.user)
+
                     this.navCtrl.setRoot(IndexPage);
                     
 				} else {
-					this.showAlert("로그인정보를 입력해 주십시오.");
+                    this.alert.showWithMessage("로그인정보를 입력해 주십시오.");
 				}
 			
 			} else {
-				this.showAlert(res.message);
+                this.alert.showWithMessage(res.message);
 			}
 			
 		}, (err) => {
-			this.showAlert("failed loading json data");
+            this.alert.showWithMessage("failed loading json data");
 		});
 	
 	}
-	
-	showAlert(message: any) {
-    	let alert = this.alertCtrl.create({
-      		title: "알림",
-      		subTitle: message,
-      		buttons: ["확인"]
-    	});
-    	alert.present();
-  	}
 }

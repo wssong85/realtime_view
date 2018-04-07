@@ -43,10 +43,10 @@ export class BuyPage {
     curPos: any;
 
     circle: any = new google.maps.Circle({
-        strokeColor: '#FF0000',
+        strokeColor: '#0000ff',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#FF0000',
+        fillColor: '#0000ff',
         fillOpacity: 0.35
     });
 
@@ -144,12 +144,14 @@ export class BuyPage {
         }
         
         if (Object.keys(this.zone).length === 0) {
-
             this.circle.setMap(null);
         } else {
+
             this.circle.setMap(this.map);
             this.circle.setCenter((new google.maps.LatLng(this.zone.y, this.zone.x)));
             this.circle.setRadius(BuyPage.RADIUS * 1000); // 1000m = 1km
+
+    		this.map.fitBounds(this.circle.getBounds());
         }
     
 		this.loading.hide();
