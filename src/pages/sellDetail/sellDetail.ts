@@ -85,59 +85,52 @@ export class SellDetailPage {
 					, "USER_PW" : 1234
 		};
 
-		const result = this.gAjax.gFnAjax(param);
+		//const result = this.gAjax.gFnAjax(param);
 
-		console.log(result);
-		
-		// let returnMap = this.gAjax.gFnAjax("/shopping/product/apiSelectSellProduct.do", this.paramProduct);
-		// console.log(returnMap);
-
-
-
-		// this.http.post("http://localhost/shopping/product/apiSelectSellProduct.do", this.paramProduct, { headers: headers })
-		// .subscribe((res: any) => {
+		this.http.post("http://localhost/shopping/product/apiSelectSellProduct.do", this.paramProduct, { headers: headers })
+		.subscribe((res: any) => {
   
-		// 	const product = res.data.product;
-		// 	const file = res.data.file;
+			const product = res.data.product;
+			const file = res.data.file;
 
-		// 	//데이터셋팅
-		// 	if(res.success) {
-		// 		//console.log(product);
-		// 		if (product) {
-		// 			this.productSeq = product.PRODUCT_SEQ;
-		// 			this.hashtagOrg = product.HASHTAG;
-		// 			this.saleLoc    = product.SALE_LOC;
-		// 			this.title      = product.TITLE;
-		// 			this.tradeSe    = product.TRADE_SE;
-		// 			this.saleSe     = product.SALE_SE;
-		// 			this.cash       = {lower: product.MIN_COST, upper: product.MAX_COST};
-		// 			//this.cash.lower = product.MIN_COST;
-		// 			//this.cash.upper = product.MAX_COST;
-		// 		}
-		// 		if (file) {
-		// 			for (let i in file) {
-		// 				let item = file[i];
-		// 				let imgSrc = "http://localhost/com/file/apiSelectTbFileDetail.do?FILE_ID=" + item.FILE_ID
-		// 						   + "&FILE_DETAIL_ID=" + item.FILE_DETAIL_ID
-		// 						   + "&FILE_SEQ=" + item.FILE_SEQ;
-		// 				if (item.FILE_SEQ==1) {
-		// 					this.imgSrc1 = imgSrc;
-		// 				} else if (item.FILE_SEQ==2) {
-		// 					this.imgSrc2 = imgSrc;
-		// 				} else if (item.FILE_SEQ==3) {
-		// 					this.imgSrc3 = imgSrc;
-		// 				}
-		// 			}
-		// 		}
-		// 	}
+			//데이터셋팅
+			if(res.success) {
+				//console.log(product);
+				if (product) {
+					this.productSeq = product.PRODUCT_SEQ;
+					this.hashtagOrg = product.HASHTAG;
+					this.saleLoc    = product.SALE_LOC;
+					this.title      = product.TITLE;
+					this.tradeSe    = product.TRADE_SE;
+					this.saleSe     = product.SALE_SE;
+					this.cash       = {lower: product.MIN_COST, upper: product.MAX_COST};
+					//this.cash.lower = product.MIN_COST;
+					//this.cash.upper = product.MAX_COST;
+				}
+				if (file) {
+					for (let i in file) {
+						let item = file[i];
+						let imgSrc = "http://localhost/com/file/apiSelectTbFileDetail.do?FILE_ID=" + item.FILE_ID
+								   + "&FILE_DETAIL_ID=" + item.FILE_DETAIL_ID
+								   + "&FILE_SEQ=" + item.FILE_SEQ;
+						if (item.FILE_SEQ==1) {
+							this.imgSrc1 = imgSrc;
+						} else if (item.FILE_SEQ==2) {
+							this.imgSrc2 = imgSrc;
+						} else if (item.FILE_SEQ==3) {
+							this.imgSrc3 = imgSrc;
+						}
+					}
+				}
+			}
 
-		// 	this.loading.hide();
+			this.loading.hide();
 
-		// }, (err) => {
+		}, (err) => {
 			  
-		// 	  this.loading.hide();
-		// 	  this.alert.showWithMessage("failed loading json data");
-		//   });
+			  this.loading.hide();
+			  this.alert.showWithMessage("failed loading json data");
+		  });
     }
 
   	//해시태그변경 이벤트
