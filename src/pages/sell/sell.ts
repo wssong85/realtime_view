@@ -57,19 +57,15 @@ export class SellPage {
         		//공통ajax 변수셋팅
 		var param = { "url" : "http://localhost/shopping/product/apiSelectSellProductList.do"
 					, "param" : this.param
-					, "ajaxType" : 1
+                    , "ajaxType" : 1
 		};
 
-		const result = this.gAjax.gFnAjax(param);
+		this.gAjax.gFnAjax(param, this.callbackFnc.bind(this));
 
-        console.log(result);
-        
-        this.loading.hide();
+        //console.log(result);
 
         // this.http.post("http://localhost/shopping/product/apiSelectSellProductList.do", this.param, { headers: headers })
         // .subscribe((res: any) => {
-
-        //     console.log("sell.ts initList results => %o", res);
 
         //     if (res.data.length === 0) {
 
@@ -94,6 +90,24 @@ export class SellPage {
         //     this.loading.hide();
         //     this.alert.showWithMessage("failed loading json data");
         // });
+    }
+
+    //ajax 콜백함수 테스트중
+    callbackFnc(res) {
+        console.log(res);
+
+        if (res.data.length === 0) {
+
+                this.alert.showWithMessage("더이상 없엉..");
+                this.page = 0;
+
+        } else {
+
+            // 기존 목록과 합침
+            this.products = this.products.concat(res.data);
+            this.page += 1;
+        }
+        this.loading.hide();
     }
 	
     // 판매등록
