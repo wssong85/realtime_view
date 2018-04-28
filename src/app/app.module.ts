@@ -10,6 +10,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
+import { UserAgent } from '@ionic-native/user-agent';
 
 import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
@@ -76,7 +77,8 @@ import { gAjaxProvider } from '../providers/comm/gAjaxProvider';
     File,
     FileTransfer,
     FileTransferObject,
-    Camera,
+	Camera,
+	UserAgent,
     GUserProvider,
     gAjaxProvider
   ]
