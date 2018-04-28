@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 
 import { Http, Headers } from '@angular/http';
 
@@ -23,8 +23,8 @@ import 'rxjs/add/operator/timeout';
 })
 export class Login {
     
-    constructor(public navCtrl: NavController, public alert: AlertProvider, public gUser: GUserProvider, public http: Http) {
-
+    constructor(public navCtrl: NavController, public events: Events, public http: Http,
+        public alert: AlertProvider, public gUser: GUserProvider) {
   	}
       
     username: string = "";
@@ -50,16 +50,19 @@ export class Login {
 		.map(res => res.json())
 		
 		.subscribe(res => {
-		
+        
+            console.log("res ==>", res);
+            
 			if(res.success) {
-			
-                console.log("==>", res);
-                			
+
 				if(res.result) {
-
                     // 사용자 정보 저장
-                    this.gUser.set(res.user)
+                    this.gUser.set(res.user);
 
+                    // 로그인 이벤트 호출
+                    this.events.publish("user:login", this.gUser.get("USER_NAME"));
+
+                    // 페이지 변경 처리
                     this.navCtrl.setRoot(IndexPage);
                     
 				} else {
@@ -73,6 +76,5 @@ export class Login {
 		}, (err) => {
             this.alert.showWithMessage("failed loading json data");
 		});
-	
 	}
 }

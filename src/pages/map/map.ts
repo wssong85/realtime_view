@@ -36,7 +36,7 @@ export class MapPage {
     	this.geolocation.getCurrentPosition().then((resp) => {
  			
  			lat = resp.coords.latitude;
- 			lng =  resp.coords.longitude;
+ 			lng = resp.coords.longitude;
  			
  			console.log("map.ts geolocation => ", lat, lng);
  			

@@ -20,12 +20,12 @@ export class gAjaxProvider {
 
     /**
      * gMapAjax : 맵을 인자값으로 호출하는 ajax
-     * 
+     *
      * obj { url   : 호출 url
      *     , param : 호출시 보낼 parameter
      *     , ajaxType : 타입
      *     , USER_ID : userid
-     *     , USER_PW : userpw 
+     *     , USER_PW : userpw
      * }
      */
     gFnAjax(obj, callbackFnc) {
@@ -49,7 +49,7 @@ export class gAjaxProvider {
             returnData.result = "false";
             returnData.msg = "api 주소가 아닙니다.";
             return returnData;
-            
+
         } else {
 
             let headers = new HttpHeaders();
@@ -57,22 +57,22 @@ export class gAjaxProvider {
 
             obj.param.USER_ID = this.gUser.get("USER_ID");
             obj.param.PASSWORD = this.gUser.get("PASSWORD");
-            
+
             this.http.post(obj.url, obj.param, { headers: headers })
             .subscribe((res: any)  => {
-                
+
             	if (res.success) {
 
                     console.log(res);
                     console.log("!!!!!!!!!!!!!");
                     console.log("==>" + res.result);
-                    
+
                     returnData.result = res.success;
                     returnData.msg    = res.message;
                     returnData.data   = res.data;
 
                     callbackFnc(returnData);
-                
+
             	} else {
 
                     //alert
@@ -80,7 +80,7 @@ export class gAjaxProvider {
 
                     this.alert.showWithMessage("failed loading json data");
             	}
-                
+
             }, (err) => {
 
                 this.alert.showWithMessage("failed loading json data");
@@ -93,16 +93,15 @@ export class gAjaxProvider {
 
 
 
-        
+
     }
 
-Y
-    /** 
+    /**
      * gListAjax : list를 인자값으로 호출하는 ajax
      */
     gListAjax() {
 
     }
 
-    
+
 }
